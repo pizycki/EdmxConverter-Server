@@ -3,7 +3,7 @@ using Nancy.Testing;
 using Shouldly;
 using Xunit;
 
-namespace WebAPI.Tests
+namespace WebAPI.Tests.NancyModules
 {
     public class ConvertNancyModuleTests : IClassFixture<ConvertModuleTests_Fixture>
     {

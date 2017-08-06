@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "WebAPI\WebAPI.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI.Tests", "WebAPI.Tests\WebAPI.Tests.csproj", "{1AD087E1-CB2F-447A-B371-79A3FBBF2C32}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleDatabase", "SampleDatabase\SampleDatabase.csproj", "{D281EC33-3C38-47F2-B5AC-84FD4F200A88}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EdmxConverter", "EdmxConverter", "{1DCFBAC3-AC6A-454E-8439-198B3E373B7D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,8 +25,16 @@ Global
 		{1AD087E1-CB2F-447A-B371-79A3FBBF2C32}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1AD087E1-CB2F-447A-B371-79A3FBBF2C32}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1AD087E1-CB2F-447A-B371-79A3FBBF2C32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D281EC33-3C38-47F2-B5AC-84FD4F200A88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D281EC33-3C38-47F2-B5AC-84FD4F200A88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D281EC33-3C38-47F2-B5AC-84FD4F200A88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D281EC33-3C38-47F2-B5AC-84FD4F200A88}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A6958567-EFFD-4D37-864D-718569CA303F} = {1DCFBAC3-AC6A-454E-8439-198B3E373B7D}
+		{1AD087E1-CB2F-447A-B371-79A3FBBF2C32} = {1DCFBAC3-AC6A-454E-8439-198B3E373B7D}
 	EndGlobalSection
 EndGlobal
