@@ -1,27 +1,34 @@
 ﻿using System;
 using System.IO;
 using System.IO.Compression;
-using System.Text;
+using System.Xml.Linq;
 using LanguageExt;
+using static LanguageExt.Prelude;
 
 namespace EdmxConverter.DomainLogic.Service
 {
     public static class ConvertEdmx
     {
-        private static Map<Direction, Func<Edmx, Edmx>> Converters { get; } =
-            Prelude.Map(
-                Prelude.Tuple<Direction, Func<Edmx, Edmx>>(Directions.XmlToResource, ConvertToResource.Convert),
-                Prelude.Tuple<Direction, Func<Edmx, Edmx>>(Directions.ResourceToXml, ConvertToXml.Convert));
-
         public static Edmx Convert(Option<ConvertEdmxArguments> args)
         {
             var direction = MapDirection(args);
             var source = MapSource(args);
 
-            var target = Converters.Find(direction)
-                                   .Match(Some: converter => converter(source),
-                                          None: () => throw new IndexOutOfRangeException("Converter for that direction is unavailable."));
-            return target;
+            // Xml -> Resource ======================================
+
+            if (direction == Directions.XmlToResource)
+                return ConvertToResource.Convert(source)
+                                          .IfNone(new ResourceEdmx(string.Empty));
+
+
+            // Resource -> Xml ======================================
+
+            if (direction == Directions.ResourceToXml)
+                return ConvertToXml.Convert(source)
+                                     .IfNone(new XmlEdmx(string.Empty));
+
+
+            throw new ArgumentOutOfRangeException();
         }
 
         private static Edmx MapSource(Option<ConvertEdmxArguments> args)
@@ -51,8 +58,8 @@ namespace EdmxConverter.DomainLogic.Service
             Target = target;
         }
 
-        public EdmxTypeEnum Source { get; set; }
-        public EdmxTypeEnum Target { get; set; }
+        public EdmxTypeEnum Source { get; }
+        public EdmxTypeEnum Target { get; }
     }
 
     public enum EdmxTypeEnum
@@ -62,23 +69,22 @@ namespace EdmxConverter.DomainLogic.Service
 
     public static class ConvertToXml
     {
-        public static XmlEdmx Convert<TSource>(TSource source) where TSource : Edmx
+        public static Option<XmlEdmx> Convert(Edmx source)
         {
-            // TODO Pattern matching for generic since C#7.1
-            //https://github.com/dotnet/csharplang/blob/master/proposals/generics-pattern-match.md
+            switch (source)
+            {
+                case ResourceEdmx res:
+                    return ConvertResourceToXml(res);
 
-            var edmx = source as ResourceEdmx;
-            if (edmx != null)
-                return ConvertResourceToXml(edmx);
+                case DatabaseEdmx db:
+                    return ConvertDatabaseModelToXml(db);
 
-            var databaseEdmx = source as DatabaseEdmx;
-            if (databaseEdmx != null)
-                return ConvertDatabaseModelToXml(databaseEdmx);
-
-            throw new ArgumentOutOfRangeException();
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
-        private static XmlEdmx ConvertResourceToXml(ResourceEdmx source)
+        private static Option<XmlEdmx> ConvertResourceToXml(ResourceEdmx source)
         {
             return source
                 .Then(Service.Convert.Base64ToGZipBinary)
@@ -93,17 +99,19 @@ namespace EdmxConverter.DomainLogic.Service
 
     public static class ConvertToResource
     {
-        public static ResourceEdmx Convert(Edmx source)
+        public static Option<ResourceEdmx> Convert(Edmx source)
         {
-            var xmlEdmx = source as XmlEdmx;
-            if (xmlEdmx != null)
-                return ConvertFromXml(xmlEdmx);
+            switch (source)
+            {
+                case XmlEdmx xml:
+                    return ConvertFromXml(xml);
 
-            var databaseEdmx = source as DatabaseEdmx;
-            if (databaseEdmx != null)
-                return ConvertFromDatabase(databaseEdmx);
+                case DatabaseEdmx db:
+                    return ConvertFromDatabase(db);
 
-            throw new ArgumentOutOfRangeException();
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         private static ResourceEdmx ConvertFromDatabase(DatabaseEdmx databaseEdmx)
@@ -114,42 +122,41 @@ namespace EdmxConverter.DomainLogic.Service
         private static ResourceEdmx ConvertFromXml(XmlEdmx xmlEdmx)
         {
             return xmlEdmx
-                .Then(Service.Convert.XmlEdmxToByteArray)
-                .Then(Service.Convert.BytesToGzipBinary)
+                .Then(Service.Convert.XmlEdmxToGzipBinary)
                 .Then(Service.Convert.GZipBinaryToBase64);
         }
-
     }
 
     public static class Convert
     {
         public static GZipBinary Base64ToGZipBinary(ResourceEdmx source) => new GZipBinary(System.Convert.FromBase64String(source.Value));
 
-        public static XmlEdmx GZipBinaryToPlainXml(GZipBinary source)
+        public static Option<XmlEdmx> GZipBinaryToPlainXml(GZipBinary source)
         {
             using (var memoryStream = new MemoryStream(source.Value))
             using (var gzip = new GZipStream(memoryStream, CompressionMode.Decompress))
             using (var reader = new StreamReader(gzip))
             {
-                return XmlEdmx.Create(reader.ReadToEnd());
+                return Some(new XmlEdmx(reader.ReadToEnd()));
             }
         }
 
-        public static GZipBinary BytesToGzipBinary(byte[] source)
+        public static GZipBinary XmlEdmxToGzipBinary(XmlEdmx xmlEdmx)
         {
-            using (var resultStream = new MemoryStream(source.Length))
-            using (var compressionStream = new GZipStream(resultStream, CompressionMode.Compress))
+            using (var outStream = new MemoryStream())
             {
-                compressionStream.Write(source, 0, source.Length);
-                return new GZipBinary(resultStream.ToArray());
+                using (var gzipStream = new GZipStream(outStream, CompressionMode.Compress))
+                {
+                    xmlEdmx.Value.Save(gzipStream);
+                }
+
+                return new GZipBinary(outStream.ToArray());
             }
         }
 
         public static ResourceEdmx GZipBinaryToBase64(GZipBinary source) =>
             System.Convert.ToBase64String(source.Value)
-            .Then(v => ResourceEdmx.Create(v));
-
-        public static byte[] XmlEdmxToByteArray(XmlEdmx arg) => Encoding.ASCII.GetBytes(arg.Value);
+            .Then(v => new ResourceEdmx(v));
     }
 
     public static class FlowExtensions
@@ -165,18 +172,40 @@ namespace EdmxConverter.DomainLogic.Service
         public byte[] Value { get; }
         public EdmxType Type { get; }
 
-        public GZipBinary(Option<byte[]> value) =>
-            Value = value.IfNone(new byte[0]);
+        public GZipBinary(Option<byte[]> value) => Value = value.IfNone(new byte[0]);
     }
+
 
     public class XmlEdmx : Edmx
     {
-        public string Value { get; }
+        public XDocument Value { get; }
         public EdmxType Type { get; } = XmlEdmxType.Create();
 
-        private XmlEdmx(Option<string> value) => Value = value.IfNone(string.Empty);
-        public static XmlEdmx Create(Option<string> value) => new XmlEdmx(value);
+        public XmlEdmx(Option<string> plainXml)
+        {
+            Value = plainXml.Match(
+                Some: XDocument.Parse,
+                None: () => throw new ArgumentNullException(nameof(plainXml)));
+        }
 
+        public XmlEdmx(Option<XDocument> document)
+        {
+            Value = document.Match(
+                Some: Validate,
+                None: () => throw new ArgumentNullException(nameof(document)));
+        }
+
+        private XDocument Validate(XDocument doc)
+        {
+            // TODO validation
+
+            return doc;
+        }
+
+        public override string ToString()
+        {
+            return Value.ToString(SaveOptions.OmitDuplicateNamespaces);
+        }
     }
 
     public class ResourceEdmx : Edmx
@@ -184,8 +213,7 @@ namespace EdmxConverter.DomainLogic.Service
         public string Value { get; }
         public EdmxType Type { get; } = ResourceEdmxType.Create();
 
-        public static ResourceEdmx Create(Option<string> value) => new ResourceEdmx(value);
-        private ResourceEdmx(Option<string> value) => Value = value.IfNone(string.Empty);
+        public ResourceEdmx(Option<string> value) => Value = value.IfNone(string.Empty);
     }
 
     public class DatabaseEdmx : Edmx
@@ -199,7 +227,7 @@ namespace EdmxConverter.DomainLogic.Service
 
     public abstract class Edmx
     {
-        public EdmxType Type { get; }
+        public EdmxTypeEnum Type { get; }
     }
 
     public abstract class EdmxType { }

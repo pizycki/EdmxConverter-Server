@@ -87,6 +87,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Acceptance\Bla.cs" />
     <Compile Include="Acceptance\ToResource\ConvertFromXml.cs" />
     <Compile Include="Acceptance\ToXml\ConvertFromResource_Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

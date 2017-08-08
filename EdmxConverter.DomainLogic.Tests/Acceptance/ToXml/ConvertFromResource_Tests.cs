@@ -15,9 +15,10 @@ namespace EdmxConverter.DomainLogic.Tests.Acceptance.ToXml
         public void convert_from_plain_resource()
         {
             var resourceValue = Resources.SampleResourceEdmx;
-            var resourceEdmx = ResourceEdmx.Create(resourceValue);
-            var xml = ConvertToXml.Convert(resourceEdmx);
-            Approvals.Verify(xml.Value);
+            var resourceEdmx = new ResourceEdmx(resourceValue);
+            ConvertToXml.Convert(resourceEdmx)
+                        .Match(Some: value => Approvals.Verify(value.ToString()),
+                               None: () => Approvals.Verify(""));
         }
     }
 }

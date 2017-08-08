@@ -15,11 +15,10 @@ namespace EdmxConverter.DomainLogic.Tests.Acceptance.ToResource
         public void convert_plain_xml()
         {
             var xmlValue = Resources.SampleXmlEdmx;
-            var xmlEdmx = XmlEdmx.Create(xmlValue);
-            var resourceTarget = ConvertToResource.Convert(xmlEdmx);
-
-            Approvals.Verify(resourceTarget.Value);
-
+            var xmlEdmx = new XmlEdmx(xmlValue);
+            ConvertToResource.Convert(xmlEdmx)
+                             .Match(Some: res => Approvals.Verify(res.Value),
+                                    None: () => Approvals.Verify(string.Empty));
         }
     }
 }
