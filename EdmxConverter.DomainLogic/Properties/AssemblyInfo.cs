@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using NullGuard;
 
@@ -37,3 +38,6 @@ using NullGuard;
 
 // Fody configuration
 [assembly: NullGuard(ValidationFlags.All)]
+
+// Testing
+[assembly: InternalsVisibleTo("EdmxConverter.DomainLogic.Tests")]

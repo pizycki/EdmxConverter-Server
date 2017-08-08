@@ -40,7 +40,7 @@ namespace EdmxConverter.DomainLogic.Service
         }
     }
 
-    public static class ConvertToXml
+    internal static class ConvertToXml
     {
         public static Result<XmlEdmx> FromResource(ResourceEdmx source)
         {
@@ -55,7 +55,7 @@ namespace EdmxConverter.DomainLogic.Service
         }
     }
 
-    public static class ConvertToResource
+    internal static class ConvertToResource
     {
         public static Result<ResourceEdmx> FromDatabaseModel(DatabaseEdmx databaseEdmx)
         {
