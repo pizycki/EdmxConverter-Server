@@ -16,9 +16,8 @@ namespace EdmxConverter.DomainLogic.Tests.Acceptance.ToResource
         {
             var xmlValue = Resources.SampleXmlEdmx;
             var xmlEdmx = new XmlEdmx(xmlValue);
-            ConvertToResource.Convert(xmlEdmx)
-                             .Match(Some: res => Approvals.Verify(res.Value),
-                                    None: () => Approvals.Verify(string.Empty));
+            ConvertToResource.FromXml(xmlEdmx)
+                             .IfSucc(res => Approvals.Verify(res.Value));
         }
     }
 }
