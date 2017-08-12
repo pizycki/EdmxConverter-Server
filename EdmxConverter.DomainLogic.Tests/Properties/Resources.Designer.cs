@@ -79,12 +79,11 @@ namespace EdmxConverter.DomainLogic.Tests.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-        ///&lt;Edmx Version=&quot;3.0&quot; xmlns=&quot;http://schemas.microsoft.com/ado/2009/11/edmx&quot;&gt;
+        ///   Looks up a localized string similar to &lt;Edmx Version=&quot;3.0&quot; xmlns=&quot;http://schemas.microsoft.com/ado/2009/11/edmx&quot;&gt;
         ///  &lt;Runtime&gt;
         ///    &lt;ConceptualModels&gt;
         ///      &lt;Schema Namespace=&quot;SampleDatabase.SampleDbContext&quot; Alias=&quot;Self&quot; annotation:UseStrongSpatialTypes=&quot;false&quot; xmlns:annotation=&quot;http://schemas.microsoft.com/ado/2009/02/edm/annotation&quot; xmlns:customannotation=&quot;http://schemas.microsoft.com/ado/2013/11/edm/customannotation&quot; xmlns=&quot;http://schemas.microsoft.com/ado/2009/11/edm&quot;&gt;
-        ///        &lt;EntityType Name=&quot;Foo&quot;  [rest of string was truncated]&quot;;.
+        ///        &lt;EntityType Name=&quot;Foo&quot; customannotation:ClrType=&quot;SampleDatabase [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string SampleXmlEdmx {
             get {

@@ -3,6 +3,7 @@ using ApprovalTests.Reporters;
 using EdmxConverter.DomainLogic.Service;
 using EdmxConverter.DomainLogic.Tests.Properties;
 using Xunit;
+using static LanguageExt.Prelude;
 
 namespace EdmxConverter.DomainLogic.Tests.Acceptance.ToXml
 {
@@ -11,13 +12,12 @@ namespace EdmxConverter.DomainLogic.Tests.Acceptance.ToXml
         [Fact]
         [UseReporter(typeof(DiffReporter))]
         [UseApprovalSubdirectory("Approved")]
-        public void convert_from_plain_resource()
-        {
-            var resourceValue = Resources.SampleResourceEdmx;
-            var resourceEdmx = new ResourceEdmx(resourceValue);
-            ConvertToXml.FromResource(resourceEdmx)
-                .Match(edmx => edmx.ToString(), () => "")
+        public void convert_from_plain_resource() =>
+            Some(Resources.SampleResourceEdmx)
+                .Map(sample => new ResourceEdmx(sample))
+                .Bind(ConvertToXml.FromResource)
+                .Match(edmx => edmx.ToString(), () => None.ToString())
                 .Verify();
-        }
+
     }
 }
