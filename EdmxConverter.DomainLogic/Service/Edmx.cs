@@ -32,10 +32,8 @@ namespace EdmxConverter.DomainLogic.Service
             return doc;
         }
 
-        public override string ToString()
-        {
-            return Value.ToString(SaveOptions.OmitDuplicateNamespaces);
-        }
+        public override string ToString() => Value.ToString(SaveOptions.OmitDuplicateNamespaces);
+
     }
 
     public sealed class ResourceEdmx : Edmx
@@ -44,6 +42,8 @@ namespace EdmxConverter.DomainLogic.Service
         public EdmxTypeEnum Type { get; } = EdmxTypeEnum.Resource;
 
         public ResourceEdmx(string value) => Value = value;
+
+        public override string ToString() => Value;
     }
 
     public sealed class DatabaseEdmx : Edmx
@@ -52,6 +52,8 @@ namespace EdmxConverter.DomainLogic.Service
         public EdmxTypeEnum Type { get; } = EdmxTypeEnum.Xml;
 
         public DatabaseEdmx(string value) => Value = value;
+
+        public override string ToString() => Value;
     }
 
     public abstract class Edmx

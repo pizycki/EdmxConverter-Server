@@ -89,6 +89,8 @@
   <ItemGroup>
     <Compile Include="Acceptance\ToResource\ConvertFromXml.cs" />
     <Compile Include="Acceptance\ToXml\ConvertFromResource_Tests.cs" />
+    <Compile Include="ApprovalsExtensions.cs" />
+    <Compile Include="EdmxTypes\ToStringOverrideTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -101,6 +103,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EdmxConverter.Core\EdmxConverter.Core.csproj">
+      <Project>{c943f01d-adf5-4127-8976-5005a152aee7}</Project>
+      <Name>EdmxConverter.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EdmxConverter.DomainLogic\EdmxConverter.DomainLogic.csproj">
       <Project>{2402EA58-2B42-418A-9FBF-163969AE96B7}</Project>
       <Name>EdmxConverter.DomainLogic</Name>
@@ -110,6 +116,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

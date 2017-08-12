@@ -1,5 +1,4 @@
-﻿using ApprovalTests;
-using ApprovalTests.Namers;
+﻿using ApprovalTests.Namers;
 using ApprovalTests.Reporters;
 using EdmxConverter.DomainLogic.Service;
 using EdmxConverter.DomainLogic.Tests.Properties;
@@ -17,7 +16,8 @@ namespace EdmxConverter.DomainLogic.Tests.Acceptance.ToXml
             var resourceValue = Resources.SampleResourceEdmx;
             var resourceEdmx = new ResourceEdmx(resourceValue);
             ConvertToXml.FromResource(resourceEdmx)
-                        .IfSucc(xml => Approvals.Verify(xml.ToString()));
+                .Match(edmx => edmx.ToString(), () => "")
+                .Verify();
         }
     }
 }

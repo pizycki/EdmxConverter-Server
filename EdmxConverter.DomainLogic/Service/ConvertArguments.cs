@@ -1,6 +1,5 @@
 ﻿namespace EdmxConverter.DomainLogic.Service
 {
-
     // ConvertEdmxArgs
 
     public abstract class ConvertEdmxArgs
@@ -27,7 +26,7 @@
             Model = source;
         }
 
-        public XmlEdmx Model { get; set; }
+        public XmlEdmx Model { get; }
     }
 
     public abstract class ConvertFromResourceArgs : ConvertEdmxArgs
@@ -37,7 +36,7 @@
             Model = source;
         }
 
-        public ResourceEdmx Model { get; set; }
+        public ResourceEdmx Model { get; }
     }
 
     public abstract class ConvertFromDatabaseArgs : ConvertEdmxArgs
@@ -47,7 +46,7 @@
             Model = source;
         }
 
-        public DatabaseEdmx Model { get; set; }
+        public DatabaseEdmx Model { get; }
     }
 
 
@@ -91,7 +90,4 @@
     {
         public ConvertXmlToResource(XmlEdmx source) : base(source, EdmxTypeEnum.Resource) { }
     }
-
-
-
 }

@@ -2,14 +2,15 @@
 using System.IO;
 using System.IO.Compression;
 using LanguageExt;
+using static LanguageExt.Prelude;
 
 namespace EdmxConverter.DomainLogic.Service
 {
     public static class Converting
     {
-        public static Result<GZipBinary> Base64ToGZipBinary(ResourceEdmx source) => new GZipBinary(System.Convert.FromBase64String(source.Value));
+        public static Option<GZipBinary> Base64ToGZipBinary(ResourceEdmx source) => new GZipBinary(Convert.FromBase64String(source.Value));
 
-        public static Result<XmlEdmx> GZipBinaryToPlainXml(GZipBinary source)
+        public static Option<XmlEdmx> GZipBinaryToPlainXml(GZipBinary source)
         {
             using (var memoryStream = new MemoryStream(source.Value))
             using (var gzip = new GZipStream(memoryStream, CompressionMode.Decompress))
@@ -19,7 +20,7 @@ namespace EdmxConverter.DomainLogic.Service
             }
         }
 
-        public static Result<GZipBinary> XmlEdmxToGzipBinary(XmlEdmx xmlEdmx)
+        public static Option<GZipBinary> XmlEdmxToGzipBinary(XmlEdmx xmlEdmx)
         {
             using (var outStream = new MemoryStream())
             {
@@ -28,12 +29,12 @@ namespace EdmxConverter.DomainLogic.Service
                     xmlEdmx.Value.Save(gzipStream);
                 }
 
-                return new GZipBinary(outStream.ToArray());
+                return Some(new GZipBinary(outStream.ToArray()));
             }
         }
 
-        public static ResourceEdmx GZipBinaryToBase64(GZipBinary source) =>
-            Convert.ToBase64String(source.Value)
-                .Then(v => new ResourceEdmx(v));
+        public static Option<ResourceEdmx> GZipBinaryToBase64(GZipBinary source) =>
+            Some(Convert.ToBase64String(source.Value))
+                .Bind(base64 => Some(new ResourceEdmx(base64)));
     }
 }
