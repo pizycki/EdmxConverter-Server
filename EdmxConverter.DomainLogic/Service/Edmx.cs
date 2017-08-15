@@ -4,9 +4,12 @@ namespace EdmxConverter.DomainLogic.Service
 {
     public sealed class GZipBinary : Edmx
     {
-        public byte[] Value { get; }
+        public ByteArray ByteArray { get; }
 
-        public GZipBinary(byte[] value) : base(EdmxTypeEnum.GzipBinary) => Value = value;
+        public GZipBinary(byte[] value) : base(EdmxTypeEnum.GzipBinary)
+        {
+            ByteArray = new ByteArray(value);
+        }
     }
 
     public sealed class XmlEdmx : Edmx
@@ -18,11 +21,14 @@ namespace EdmxConverter.DomainLogic.Service
             Value = XDocument.Parse(plainXml);
 
         public override string ToString() => Value.ToString(SaveOptions.OmitDuplicateNamespaces);
-
     }
 
     public sealed class ResourceEdmx : Edmx
     {
+        /// <summary>
+        /// BASE64 value
+        /// </summary>
+        /// <example>H4sIAAAAAAAEAM1X227bOBB9X2D/g ... XQ0D7gMAAA=</example>
         public string Value { get; }
 
         public ResourceEdmx(string value)
@@ -34,13 +40,19 @@ namespace EdmxConverter.DomainLogic.Service
 
     public sealed class DatabaseEdmx : Edmx
     {
-        public string Value { get; }
+        /// <summary>
+        /// Hexdecimal binary model
+        /// </summary>
+        /// <example>0x1F8B0800000000000400CD57DB6EDB38107D5F60FF81...</example>
+        public Hex Value { get; }
 
-        public DatabaseEdmx(string value)
-            : base(EdmxTypeEnum.Database) =>
+        public DatabaseEdmx(Hex value)
+            : base(EdmxTypeEnum.Database)
+        {
             Value = value;
+        }
 
-        public override string ToString() => Value;
+        public override string ToString() => Value.Value;
     }
 
     public abstract class Edmx

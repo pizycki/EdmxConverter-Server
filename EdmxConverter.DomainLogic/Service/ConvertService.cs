@@ -45,7 +45,10 @@ namespace EdmxConverter.DomainLogic.Service
 
     internal static class ConvertToResource
     {
-        public static Option<ResourceEdmx> FromDatabaseModel(DatabaseEdmx databaseEdmx) => None; // TODO implement
+        public static Option<ResourceEdmx> FromDatabaseModel(DatabaseEdmx databaseEdmx) =>
+            Some(databaseEdmx)
+                .Bind(Converting.HexToBase64);
+
 
         public static Option<ResourceEdmx> FromXml(XmlEdmx xmlEdmx) =>
             Some(xmlEdmx)

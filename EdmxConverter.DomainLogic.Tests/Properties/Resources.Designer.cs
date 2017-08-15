@@ -61,7 +61,7 @@ namespace EdmxConverter.DomainLogic.Tests.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to 0x1F8B0800000000000400CD57DB6EDB38107D5F60FF81E0D31648C5247DD906528BD4898BA075525469DF6969EC10CB8BCA4B607F5B1FFA49FB0B3BBACB521CB7E9A228020422357366E6F0CC50FEF7EBB7F8F54649720FD609A3137A121D53023A33B9D0EB8406BF7AFE377DFDEACF3FE2CB5C6DC8E7D6EE4569879EDA25F4CEFBE28C3197DD81E22E5222B3C699958F32A318CF0D3B3D3E7EC94E4E182004452C42E28F417BA1A05AE072667406850F5C2E4C0ED235FBF826AD50C93557E00A9E414253AE0A0917DCF325771035CB254278D8784ACEA5E098550A724509D7DA78EE31E7B34F0E526F8D5EA7056E7079BB2D00ED565C3A686A39EBCDBFB7AC [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string SampleDatabaseEdmx {
             get {
@@ -79,11 +79,11 @@ namespace EdmxConverter.DomainLogic.Tests.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;Edmx Version=&quot;3.0&quot; xmlns=&quot;http://schemas.microsoft.com/ado/2009/11/edmx&quot;&gt;
+        ///   Looks up a localized string similar to &lt;Edmx Version=&quot;3.0&quot; xmlns=&quot;http://schemas.microsoft.com/ado/2009/11/databaseEdmx&quot;&gt;
         ///  &lt;Runtime&gt;
         ///    &lt;ConceptualModels&gt;
         ///      &lt;Schema Namespace=&quot;SampleDatabase.SampleDbContext&quot; Alias=&quot;Self&quot; annotation:UseStrongSpatialTypes=&quot;false&quot; xmlns:annotation=&quot;http://schemas.microsoft.com/ado/2009/02/edm/annotation&quot; xmlns:customannotation=&quot;http://schemas.microsoft.com/ado/2013/11/edm/customannotation&quot; xmlns=&quot;http://schemas.microsoft.com/ado/2009/11/edm&quot;&gt;
-        ///        &lt;EntityType Name=&quot;Foo&quot; customannotation:ClrType=&quot;SampleDatabase [rest of string was truncated]&quot;;.
+        ///        &lt;EntityType Name=&quot;Foo&quot; customannotation:ClrType=&quot;Sample [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string SampleXmlEdmx {
             get {

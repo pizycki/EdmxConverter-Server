@@ -87,6 +87,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Acceptance\ToResource\ConvertFromDatabase.cs" />
     <Compile Include="Acceptance\ToResource\ConvertFromXml.cs" />
     <Compile Include="Acceptance\ToXml\ConvertFromResource_Tests.cs" />
     <Compile Include="ApprovalsExtensions.cs" />

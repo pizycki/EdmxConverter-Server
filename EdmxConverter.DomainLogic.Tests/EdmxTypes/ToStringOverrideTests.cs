@@ -34,7 +34,9 @@ namespace EdmxConverter.DomainLogic.Tests.EdmxTypes
         public void DatabaseEdmx_ToString_returns_wrapped_value()
         {
             Some(Resources.SampleDatabaseEdmx)
-                .Map(smpl => (smpl, new DatabaseEdmx(smpl).ToString()))
+                .Map(sample => new Hex(sample))
+                .Map(sample => (sample, new DatabaseEdmx(sample)))
+                .Map(t => (t.Item1.Value.ToString(), t.Item2.ToString()))
                 .Map(Tuples.AreValuesEqual)
                 .ShouldBe(true);
         }

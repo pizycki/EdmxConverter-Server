@@ -75,6 +75,7 @@
     <Compile Include="Service\ConvertService.cs" />
     <Compile Include="Service\Edmx.cs" />
     <Compile Include="Service\EdmxTypeEnum.cs" />
+    <Compile Include="Service\Structs.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
