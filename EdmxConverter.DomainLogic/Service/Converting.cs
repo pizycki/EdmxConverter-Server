@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
 using LanguageExt;
 using static LanguageExt.Prelude;
 
@@ -52,16 +53,18 @@ namespace EdmxConverter.DomainLogic.Service
 
 
         private static Option<string> ToBase64String(ByteArray array) =>
-            Convert.ToBase64String(array.Bytes);
+            Some(Convert.ToBase64String(array.Bytes));
 
 
         public static Option<ByteArray> HexToByteArray(Hex hex)
         {
+            // Cut off '0x' at the beginning
             hex = hex.Value.StartsWith("0x") ? new Hex(hex.Value.Substring(2)) : hex;
-            int NumberChars = hex.Value.Length;
-            byte[] bytes = new byte[NumberChars / 2];
-            for (int i = 0; i < NumberChars; i += 2)
-                bytes[i / 2] = Convert.ToByte(hex.Value.Substring(i, 2), 16);
+
+            var bytes = Enumerable.Range(0, hex.Value.Length)
+                                  .Where(n => n % 2 == 0)
+                                  .Select(n => Convert.ToByte(hex.Value.Substring(n, 2), 16))
+                                  .ToArray();
 
             return new ByteArray(bytes);
         }
