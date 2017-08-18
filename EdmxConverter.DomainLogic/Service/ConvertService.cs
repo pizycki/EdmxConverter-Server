@@ -16,10 +16,10 @@ namespace EdmxConverter.DomainLogic.Service
                     return ConvertToResource.FromDatabaseModel(args.Model).Map(res => res.ToString());
 
                 case ConvertXmlToDatabase args:
-                    return None;// TODO implement
+                    return ConvertToDatabase.FromXml(args.Model).Map(res => res.ToString());
 
                 case ConvertResourceToDatabase args:
-                    return None;// TODO implement
+                    return ConvertToDatabase.FromResource(args.Model).Map(res => res.ToString());
 
                 case ConvertDatabaseToXml args:
                     return ConvertToXml.FromDatabaseModel(args.Model).Map(xml => xml.ToString());
@@ -33,6 +33,17 @@ namespace EdmxConverter.DomainLogic.Service
         }
     }
 
+    internal static class ConvertToDatabase
+    {
+        public static Option<DatabaseEdmx> FromResource(ResourceEdmx source) =>
+            Some(source)
+                .Bind(Converting.Base64ToByteArray)
+                .Bind(Converting.BytesToHex)
+                .Map(hex => new DatabaseEdmx(hex));
+
+        public static Option<DatabaseEdmx> FromXml(XmlEdmx source) => None; // TODO implement
+    }
+
     internal static class ConvertToXml
     {
         public static Option<XmlEdmx> FromResource(ResourceEdmx source) =>
@@ -40,7 +51,10 @@ namespace EdmxConverter.DomainLogic.Service
                 .Bind(Converting.Base64ToGZipBinary)
                 .Bind(Converting.GZipBinaryToPlainXml);
 
-        public static Option<XmlEdmx> FromDatabaseModel(DatabaseEdmx source) => None; // TODO implement
+        public static Option<XmlEdmx> FromDatabaseModel(DatabaseEdmx source) =>
+            Some(source)
+                .Bind(ConvertToResource.FromDatabaseModel)
+                .Bind(ConvertToXml.FromResource);
     }
 
     internal static class ConvertToResource

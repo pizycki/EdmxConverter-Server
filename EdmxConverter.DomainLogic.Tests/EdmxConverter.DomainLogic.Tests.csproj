@@ -87,6 +87,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Acceptance\ToDatabase\ConvertFromResource.cs" />
     <Compile Include="Acceptance\ToResource\ConvertFromDatabase.cs" />
     <Compile Include="Acceptance\ToResource\ConvertFromXml.cs" />
     <Compile Include="Acceptance\ToXml\ConvertFromResource_Tests.cs" />
@@ -123,6 +124,9 @@
   <ItemGroup>
     <Content Include="Acceptance\ToResource\Approved\ConvertFromXml.convert_plain_xml.approved.txt" />
     <Content Include="Acceptance\ToXml\Approved\ConvertFromResource_Tests.convert_from_plain_resource.approved.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Acceptance\ToDatabase\Approved\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
