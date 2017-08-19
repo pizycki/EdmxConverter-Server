@@ -1,5 +1,6 @@
 ﻿using ApprovalTests.Namers;
 using ApprovalTests.Reporters;
+using EdmxConverter.DomainLogic.DataTypes;
 using EdmxConverter.DomainLogic.Service;
 using EdmxConverter.DomainLogic.Tests.Properties;
 using Xunit;

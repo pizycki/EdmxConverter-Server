@@ -1,4 +1,4 @@
-﻿namespace EdmxConverter.DomainLogic.Service
+﻿namespace EdmxConverter.DomainLogic.DataTypes
 {
     public enum EdmxTypeEnum
     {

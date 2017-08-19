@@ -1,6 +1,7 @@
 ﻿using System.Xml.Linq;
+using EdmxConverter.DomainLogic.Structs;
 
-namespace EdmxConverter.DomainLogic.Service
+namespace EdmxConverter.DomainLogic.DataTypes
 {
     public sealed class GZipBinary : Edmx
     {
