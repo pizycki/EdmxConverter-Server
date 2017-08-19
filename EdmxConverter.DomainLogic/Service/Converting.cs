@@ -82,20 +82,29 @@ namespace EdmxConverter.DomainLogic.Service
                              .ToByteArray();
         }
 
+        [Pure]
         private static Option<Hex> CutOffHexPrefix(Hex hex) =>
             // Cut off '0x' at the beginning
             hex.Value.StartsWith("0x")
                       ? new Hex(hex.Value.Substring(2))
                       : hex;
 
+        [Pure]
         public static Option<ByteArray> Base64ToByteArray(ResourceEdmx databaseEdmx) =>
             Some(databaseEdmx)
                 .Map(x => x.Value)
                 .Bind(ToBase64Bytes);
 
-        public static Option<Hex> BytesToHex(ByteArray arg)
-        {
-            throw new NotImplementedException();
-        }
+        [Pure]
+        public static Option<Hex> BytesToHex(ByteArray array) =>
+            Some(array)
+                .Map(arr => BitConverter.ToString(arr.Bytes))
+                .Map(s => s.Replace("-", ""))
+                .Bind(AppendWithHexPrefix)
+                .Map(s => new Hex(s));
+
+        [Pure]
+        private static Option<string> AppendWithHexPrefix(string hexString) =>
+            "0x" + hexString;
     }
 }
