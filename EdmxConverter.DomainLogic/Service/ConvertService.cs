@@ -41,7 +41,10 @@ namespace EdmxConverter.DomainLogic.Service
                 .Bind(Converting.BytesToHex)
                 .Map(hex => new DatabaseEdmx(hex));
 
-        public static Option<DatabaseEdmx> FromXml(XmlEdmx source) => None; // TODO implement
+        public static Option<DatabaseEdmx> FromXml(XmlEdmx source) =>
+            Some(source)
+                .Bind(ConvertToResource.FromXml)
+                .Bind(ConvertToDatabase.FromResource);
     }
 
     internal static class ConvertToXml

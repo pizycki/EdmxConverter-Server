@@ -7,15 +7,15 @@ using static LanguageExt.Prelude;
 
 namespace EdmxConverter.DomainLogic.Tests.Acceptance.ToDatabase
 {
-    public class ConvertFromResource
+    public class FromXml
     {
         [Fact]
         [UseReporter(typeof(DiffReporter))]
         [UseApprovalSubdirectory("Approved")]
-        public void convert_from_plain_resource() =>
-            Some(Resources.SampleResourceEdmx)
-                .Map(sample => new ResourceEdmx(sample))
-                .Bind(ConvertToDatabase.FromResource)
+        public void convert_from_plain_xml() =>
+            Some(Resources.SampleXmlEdmx)
+                .Map(sample => new XmlEdmx(sample))
+                .Bind(ConvertToDatabase.FromXml)
                 .Match(edmx => edmx.ToString(), () => None.ToString())
                 .Verify();
     }

@@ -2,12 +2,13 @@
 using ApprovalTests.Reporters;
 using EdmxConverter.DomainLogic.Service;
 using EdmxConverter.DomainLogic.Tests.Properties;
+using Shouldly;
 using Xunit;
 using static LanguageExt.Prelude;
 
 namespace EdmxConverter.DomainLogic.Tests.Acceptance.ToXml
 {
-    public class ConvertFromResource_Tests
+    public class FromResource
     {
         [Fact]
         [UseReporter(typeof(DiffReporter))]

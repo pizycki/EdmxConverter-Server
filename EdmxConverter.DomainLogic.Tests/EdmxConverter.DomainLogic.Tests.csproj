@@ -87,10 +87,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Acceptance\ToDatabase\ConvertFromResource.cs" />
-    <Compile Include="Acceptance\ToResource\ConvertFromDatabase.cs" />
-    <Compile Include="Acceptance\ToResource\ConvertFromXml.cs" />
-    <Compile Include="Acceptance\ToXml\ConvertFromResource_Tests.cs" />
+    <Compile Include="Acceptance\ToDatabase\FromXml.cs" />
+    <Compile Include="Acceptance\ToDatabase\FromResource.cs" />
+    <Compile Include="Acceptance\ToResource\FromDatabase.cs" />
+    <Compile Include="Acceptance\ToResource\FromXml.cs" />
+    <Compile Include="Acceptance\ToXml\FromResource.cs" />
+    <Compile Include="Acceptance\ToXml\FromDatabase.cs" />
     <Compile Include="ApprovalsExtensions.cs" />
     <Compile Include="EdmxTypes\ToStringOverrideTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -122,9 +124,12 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Acceptance\ToDatabase\Approved\ConvertFromResource.convert_from_plain_resource.approved.txt" />
-    <Content Include="Acceptance\ToResource\Approved\ConvertFromXml.convert_plain_xml.approved.txt" />
-    <Content Include="Acceptance\ToXml\Approved\ConvertFromResource_Tests.convert_from_plain_resource.approved.txt" />
+    <Content Include="Acceptance\ToDatabase\Approved\FromResource.convert_from_plain_resource.approved.txt" />
+    <Content Include="Acceptance\ToDatabase\Approved\FromXml.convert_from_plain_xml.approved.txt" />
+    <Content Include="Acceptance\ToResource\Approved\FromXml.convert_plain_xml.approved.txt" />
+    <Content Include="Acceptance\ToResource\Approved\FromDatabase.convert_selected_varbinary_from_MigrationHistory.approved.txt" />
+    <Content Include="Acceptance\ToXml\Approved\FromDatabase.convert_from_plain_database.approved.txt" />
+    <Content Include="Acceptance\ToXml\Approved\FromResource.convert_from_plain_resource.approved.txt" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -5,19 +5,20 @@ using EdmxConverter.DomainLogic.Tests.Properties;
 using Xunit;
 using static LanguageExt.Prelude;
 
-namespace EdmxConverter.DomainLogic.Tests.Acceptance.ToResource
+namespace EdmxConverter.DomainLogic.Tests.Acceptance.ToXml
 {
-    public class ConvertFromDatabase
+    public class FromDatabase
     {
         [Fact]
         [UseReporter(typeof(DiffReporter))]
         [UseApprovalSubdirectory("Approved")]
-        public void convert_selected_varbinary_from_MigrationHistory() =>
+        public void convert_from_plain_database() =>
             Some(Resources.SampleDatabaseEdmx)
                 .Map(sample => new Hex(sample))
                 .Map(sample => new DatabaseEdmx(sample))
-                .Bind(ConvertToResource.FromDatabaseModel)
-                .Match(res => res.ToString(), () => None.ToString())
+                .Bind(ConvertToXml.FromDatabaseModel)
+                .Match(edmx => edmx.ToString(), () => None.ToString())
                 .Verify();
+
     }
 }
