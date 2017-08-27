@@ -1,6 +1,6 @@
 ﻿using System.Xml.Linq;
 
-namespace EdmxConverter.DomainLogic.Types
+namespace EdmxConverter.Schema
 {
     public sealed class GZipBinary : Edmx
     {

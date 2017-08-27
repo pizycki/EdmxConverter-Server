@@ -3,10 +3,10 @@ using System.Diagnostics.Contracts;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using EdmxConverter.DomainLogic.Types;
+using EdmxConverter.Schema;
 using LanguageExt;
 
-namespace EdmxConverter.DomainLogic.Converting
+namespace EdmxConverter.Logic
 {
     internal static class Mixed
     {

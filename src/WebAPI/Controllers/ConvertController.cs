@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Net;
-using EdmxConverter.DomainLogic.Converting;
-using EdmxConverter.DomainLogic.Converting.Arguments;
-using EdmxConverter.DomainLogic.Types;
+using EdmxConverter.Logic;
+using EdmxConverter.Logic.Arguments;
+using EdmxConverter.Schema;
 using LanguageExt;
 using Microsoft.AspNetCore.Mvc;
 
 using static LanguageExt.Prelude;
 using static EdmxConverter.WebAPI.Controllers.DirectionBuilder;
-using static EdmxConverter.DomainLogic.Types.EdmxTypeEnum;
+using static EdmxConverter.Schema.EdmxTypeEnum;
 
 namespace EdmxConverter.WebAPI.Controllers
 {

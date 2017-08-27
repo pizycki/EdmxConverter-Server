@@ -1,17 +1,16 @@
-using EdmxConverter.DomainLogic.Types;
+using EdmxConverter.Schema;
 using LanguageExt;
-using static LanguageExt.Prelude;
 
-namespace EdmxConverter.DomainLogic.Converting
+namespace EdmxConverter.Logic
 {
     internal static class ToResource
     {
         public static Option<ResourceEdmx> FromDatabaseModel(DatabaseEdmx databaseEdmx) =>
-            Some(databaseEdmx)
+            Prelude.Some(databaseEdmx)
                 .Bind(Mixed.HexToBase64);
 
         public static Option<ResourceEdmx> FromXml(XmlEdmx xmlEdmx) =>
-            Some(xmlEdmx)
+            Prelude.Some(xmlEdmx)
                 .Bind(Mixed.XmlToGZip)
                 .Bind(Mixed.GZipToBase64);
     }

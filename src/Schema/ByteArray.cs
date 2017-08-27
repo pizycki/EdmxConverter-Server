@@ -1,4 +1,4 @@
-﻿namespace EdmxConverter.DomainLogic.Types
+﻿namespace EdmxConverter.Schema
 {
     public struct ByteArray
     {

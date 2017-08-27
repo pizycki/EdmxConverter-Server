@@ -1,6 +1,6 @@
-﻿using EdmxConverter.DomainLogic.Types;
+﻿using EdmxConverter.Schema;
 
-namespace EdmxConverter.DomainLogic.Converting.Arguments
+namespace EdmxConverter.Logic.Arguments
 {
     // From FromResource
 

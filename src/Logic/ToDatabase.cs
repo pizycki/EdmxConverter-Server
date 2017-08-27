@@ -1,7 +1,7 @@
-using EdmxConverter.DomainLogic.Types;
+using EdmxConverter.Schema;
 using LanguageExt;
 
-namespace EdmxConverter.DomainLogic.Converting
+namespace EdmxConverter.Logic
 {
     internal static class ToDatabase
     {

@@ -1,6 +1,6 @@
 ﻿using LanguageExt;
 
-namespace EdmxConverter.DomainLogic.Types
+namespace EdmxConverter.Schema
 {
     public static class ByteArrayExtension
     {

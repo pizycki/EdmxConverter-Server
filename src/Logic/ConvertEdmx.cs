@@ -1,8 +1,8 @@
 using System.Diagnostics.Contracts;
-using EdmxConverter.DomainLogic.Converting.Arguments;
+using EdmxConverter.Logic.Arguments;
 using LanguageExt;
 
-namespace EdmxConverter.DomainLogic.Converting
+namespace EdmxConverter.Logic
 {
     [Pure]
     public static class ConvertEdmx
