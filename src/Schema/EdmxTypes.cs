@@ -20,7 +20,11 @@ namespace EdmxConverter.Schema
             : base(EdmxTypeEnum.Xml) =>
             Value = XDocument.Parse(plainXml);
 
-        public override string ToString() => Value.ToString(SaveOptions.OmitDuplicateNamespaces);
+        public XmlEdmx(XDocument document)
+            : base(EdmxTypeEnum.Xml) =>
+            Value = document;
+
+        public override string ToString() => Value.ToString();
     }
 
     public sealed class ResourceEdmx : Edmx

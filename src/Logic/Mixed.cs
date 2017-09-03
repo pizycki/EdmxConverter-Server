@@ -3,8 +3,10 @@ using System.Diagnostics.Contracts;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Xml.Linq;
 using EdmxConverter.Schema;
 using LanguageExt;
+using static LanguageExt.Prelude;
 
 namespace EdmxConverter.Logic
 {
@@ -24,23 +26,40 @@ namespace EdmxConverter.Logic
                 .Map(base64 => new ResourceEdmx(base64));
 
         [Pure]
-        public static Option<XmlEdmx> GZipBinaryToXml(GZipBinary source)
+        public static Option<XmlEdmx> GZipToXml(GZipBinary source)
         {
-            using (var memoryStream = new MemoryStream(source.ByteArray.Bytes))
-            using (var gzip = new GZipStream(memoryStream, CompressionMode.Decompress))
-            using (var reader = new StreamReader(gzip))
-                return new XmlEdmx(reader.ReadToEnd());
+            var bytes = source.ByteArray.Bytes;
+            var xDoc = Decompress(bytes);
+            return Some(new XmlEdmx(xDoc));
         }
 
         [Pure]
         public static Option<GZipBinary> XmlToGZip(XmlEdmx xmlEdmx)
         {
+            var xDoc = xmlEdmx.Value;
+            var bytes = Compress(xDoc);
+            return new GZipBinary(bytes);
+        }
+
+        [Pure]
+        public static byte[] Compress(XDocument model)
+        {
             using (var outStream = new MemoryStream())
             {
                 using (var gzipStream = new GZipStream(outStream, CompressionMode.Compress))
-                    xmlEdmx.Value.Save(gzipStream);
+                    model.Save(gzipStream);
 
-                return Prelude.Some(new GZipBinary(outStream.ToArray()));
+                return outStream.ToArray();
+            }
+        }
+
+        [Pure]
+        public static XDocument Decompress(byte[] bytes)
+        {
+            using (var memoryStream = new MemoryStream(bytes))
+            {
+                using (var gzipStream = new GZipStream(memoryStream, CompressionMode.Decompress))
+                    return XDocument.Load(gzipStream);
             }
         }
 
