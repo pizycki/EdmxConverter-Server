@@ -8,8 +8,7 @@ namespace EdmxConverter.Logic.Tests.OneWay
 {
     public class XmlToDatabase
     {
-        [Fact(DisplayName = "Xml -> DB",
-              Skip = "GZipping produces different results. This test is temporary turned off.")]
+        [Fact(DisplayName = "Xml -> DB")]
         public void convert_xml_to_database() =>
             Some(Resources.SampleXmlEdmx)
                 .Map(sample => new XmlEdmx(sample))

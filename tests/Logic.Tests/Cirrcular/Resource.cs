@@ -8,15 +8,14 @@ namespace EdmxConverter.Logic.Tests.Cirrcular
 {
     public class Resource
     {
-        [Fact(DisplayName = "Resx -> Xml -> Resx",
-              Skip = "GZipping produces different results. This test is temporary turned off.")]
+        [Fact(DisplayName = "Resx -> Xml -> Resx")]
         public void convert_resource_to_xml_back_and_forth() =>
             Some(Resources.SampleResourceEdmx)
                 .Map(sample => new ResourceEdmx(sample))
                 .Bind(ToXml.FromResource)
-                .Bind(ToDatabase.FromXml)
+                .Bind(ToResource.FromXml)
                 .IfSome(edmx => edmx.ToString()
-                    .ShouldBe(Resources.SampleResourceEdmx));
+                                    .ShouldBe(Resources.SampleResourceEdmx));
 
         [Fact(DisplayName = "Resx -> DB -> Resx")]
         public void convert_resource_to_database_back_and_forth() =>

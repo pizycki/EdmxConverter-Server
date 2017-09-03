@@ -8,8 +8,7 @@ namespace EdmxConverter.Logic.Tests.OneWay
 {
     public class XmlToResource
     {
-        [Fact(DisplayName = "Xml -> Resx",
-              Skip = "GZipping produces different results. This test is temporary turned off.")]
+        [Fact(DisplayName = "Xml -> Resx")]
         public void convert_xml_to_resource() =>
             Some(Resources.SampleXmlEdmx)
                 .Map(sample => new XmlEdmx(sample))
