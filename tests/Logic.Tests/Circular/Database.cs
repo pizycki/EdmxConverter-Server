@@ -4,7 +4,7 @@ using Shouldly;
 using Xunit;
 using static LanguageExt.Prelude;
 
-namespace EdmxConverter.Logic.Tests.Cirrcular
+namespace EdmxConverter.Logic.Tests.Circular
 {
     public class Database
     {
