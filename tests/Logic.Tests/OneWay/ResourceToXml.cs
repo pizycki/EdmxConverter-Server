@@ -1,18 +1,19 @@
 using EdmxConverter.Logic.Tests.Properties;
 using EdmxConverter.Schema;
-using LanguageExt;
 using Shouldly;
 using Xunit;
+using static LanguageExt.Prelude;
 
 namespace EdmxConverter.Logic.Tests.OneWay
 {
     public class ResourceToXml
     {
-        [Fact]
+        [Fact(DisplayName = "Resx -> Xml")]
         public void should_convert() =>
-            Prelude.Some(Resources.SampleResourceEdmx)
+            Some(Resources.SampleResourceEdmx)
                 .Map(sample => new ResourceEdmx(sample))
                 .Bind(ToXml.FromResource)
-                .IfSome(edmx => edmx.ToString().ShouldBe(Resources.SampleXmlEdmx));
+                .IfSome(edmx => edmx.ToString()
+                                    .ShouldBe(Resources.SampleXmlEdmx));
     }
 }

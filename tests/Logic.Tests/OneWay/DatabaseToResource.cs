@@ -8,8 +8,8 @@ namespace EdmxConverter.Logic.Tests.OneWay
 {
     public class ConvertFromDatabaseToResource
     {
-        [Fact]
-        public void should_convert() =>
+        [Fact(DisplayName = "Db -> Resx")]
+        public void convert_from_database_to_resource() =>
             Prelude.Some(Resources.SampleDatabaseEdmx)
                 .Map(sample => new Hex(sample))
                 .Map(sample => new DatabaseEdmx(sample))

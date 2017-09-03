@@ -8,7 +8,7 @@ namespace EdmxConverter.Logic.Tests.Cirrcular
 {
     public class Xml
     {
-        [Fact]
+        [Fact(DisplayName = "Xml -> Resx -> Xml")]
         public void convert_xml_to_resource_back_and_forth() =>
             Some(Resources.SampleXmlEdmx)
                 .Map(sample => new XmlEdmx(sample))
@@ -17,7 +17,7 @@ namespace EdmxConverter.Logic.Tests.Cirrcular
                 .IfSome(edmx => edmx.ToString()
                                     .ShouldBe(Resources.SampleXmlEdmx));
 
-        [Fact]
+        [Fact(DisplayName = "Xml -> DB -> Xml")]
         public void convert_xml_to_database_back_and_forth() =>
             Some(Resources.SampleXmlEdmx)
                 .Map(sample => new XmlEdmx(sample))
