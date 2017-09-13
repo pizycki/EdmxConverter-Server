@@ -1,9 +1,9 @@
-﻿using System;
-using CSharpFunctionalExtensions;
+﻿using CSharpFunctionalExtensions;
 using EdmxConv.Behaviours;
 using EdmxConv.Schema;
-using EdmxConv.WebAPI.Modules;
+using EdmxConv.Schema.DTO;
 using Microsoft.AspNetCore.Mvc;
+using static EdmxConv.Core.FlowHelpers;
 
 namespace EdmxConv.WebAPI.Controllers
 {
@@ -15,13 +15,8 @@ namespace EdmxConv.WebAPI.Controllers
         public IActionResult Post([FromBody] ConvertParams payload) =>
             Validate(payload)
                 .OnSuccess(p => ConvertEdmxArgsModule.CreateArguments(p))
-                .OnSuccess(arg => Convert(arg))
+                .OnSuccess(arg => ConvertModule.Convert(arg))
                 .OnBoth(result => MapToHttpResponse(result));
-
-        private static Result<Edmx> Convert(ConvertEdmxArgs args)
-        {
-            throw new NotImplementedException();
-        }
 
         // Pure
         private static Result<ConvertParams> Validate(ConvertParams payload) =>
@@ -31,10 +26,4 @@ namespace EdmxConv.WebAPI.Controllers
     }
 
 
-    public class ConvertParams
-    {
-        public string Edmx { get; set; }
-        public EdmxTypeEnum Source { get; set; }
-        public EdmxTypeEnum Target { get; set; }
-    }
 }

@@ -1,8 +1,8 @@
 ﻿using CSharpFunctionalExtensions;
 
-namespace EdmxConv.WebAPI.Controllers
+namespace EdmxConv.Core
 {
-    public static class Bla
+    public static class FlowHelpers
     {
         public static Result<K> With<K>(K target) => Result.Ok(target); // Consider null check
 
