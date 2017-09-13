@@ -11,4 +11,9 @@
     <PackageReference Include="CSharpFunctionalExtensions" Version="1.7.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\EdmxConv.Core\EdmxConv.Core.csproj" />
+    <ProjectReference Include="..\EdmxConv.Schema\EdmxConv.Schema.csproj" />
+  </ItemGroup>
+
 </Project>
