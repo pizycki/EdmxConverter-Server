@@ -5,9 +5,14 @@ namespace EdmxConv.WebAPI.Controllers
 {
     public abstract class ApiController : Controller
     {
+        protected IActionResult MapToHttpResponse<T>(Result<T> result) =>
+            result.IsSuccess
+                ? (IActionResult)Ok(result.Value)
+                : (IActionResult)BadRequest(result.Error);
+
         protected IActionResult MapToHttpResponse(Result result) =>
             result.IsSuccess
-                ? (IActionResult)Ok(result)
+                ? (IActionResult)Ok()
                 : (IActionResult)BadRequest(result.Error);
     }
 }
