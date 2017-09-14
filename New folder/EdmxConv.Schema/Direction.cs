@@ -30,9 +30,4 @@ namespace EdmxConv.Schema
             }
         }
     }
-
-    public static class DirectionExtensions
-    {
-        public static Direction ToDirection(this (EdmxTypeEnum src, EdmxTypeEnum trgt) tuple) => new Direction(tuple.src, tuple.trgt);
-    }
 }
