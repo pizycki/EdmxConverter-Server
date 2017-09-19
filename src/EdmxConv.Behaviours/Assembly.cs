@@ -1,1 +1,1 @@
-﻿
+﻿[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("EdmxConv.Behaviours.Tests")]

@@ -27,32 +27,32 @@ namespace EdmxConv.Behaviours
                 { new Direction(EdmxTypeEnum.Resource, EdmxTypeEnum.Database), edmx => ConvertToDatabase(edmx as ResourceEdmx)},
             };
 
-        private static Result<Edmx> ConvertToDatabase(ResourceEdmx xmlEdmx) =>
+        internal static Result<Edmx> ConvertToDatabase(ResourceEdmx xmlEdmx) =>
             Base64Module.Base64ToByteArray(xmlEdmx)
                 .OnSuccess(edmx => MiscModule.BytesToHex(edmx))
                 .Map(edmx => edmx.ToDatabaseEdmx())
                 .Map(edmx => edmx as Edmx);
 
-        private static Result<Edmx> ConvertToDatabase(XmlEdmx xmlEdmx) =>
+        internal static Result<Edmx> ConvertToDatabase(XmlEdmx xmlEdmx) =>
             ConvertToResource(xmlEdmx)
                 .Map(edmx => edmx as ResourceEdmx)
                 .OnSuccess(edmx => ConvertToDatabase(edmx));
 
-        private static Result<Edmx> ConvertToXml(ResourceEdmx databaseEdmx) =>
+        internal static Result<Edmx> ConvertToXml(ResourceEdmx databaseEdmx) =>
             MiscModule.Base64ToGzip(databaseEdmx)
                 .OnSuccess(edmx => MiscModule.GZipToXml(edmx))
                 .Map(edmx => edmx as Edmx);
 
-        private static Result<Edmx> ConvertToXml(DatabaseEdmx databaseEdmx) =>
+        internal static Result<Edmx> ConvertToXml(DatabaseEdmx databaseEdmx) =>
             ConvertToResource(databaseEdmx)
                 .Map(edmx => edmx as ResourceEdmx)
                 .OnSuccess(edmx => ConvertToXml(edmx));
 
-        private static Result<Edmx> ConvertToResource(DatabaseEdmx databaseEdmx) =>
+        internal static Result<Edmx> ConvertToResource(DatabaseEdmx databaseEdmx) =>
             MiscModule.HexToBase64(databaseEdmx)
                 .Map(x => x as Edmx);
 
-        private static Result<Edmx> ConvertToResource(XmlEdmx xmlEdmx) =>
+        internal static Result<Edmx> ConvertToResource(XmlEdmx xmlEdmx) =>
             MiscModule.XmlToGZip(xmlEdmx)
                 .OnSuccess(x => MiscModule.GZipToBase64(x))
                 .Map(x => x as Edmx);

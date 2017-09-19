@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="SampleDatabaseEdmx" xml:space="preserve">
+    <value>0x1F8B080000000000000BCC57DB6E1B37107D2FD07F20F8D4028E683B2FADB19BC095ADC06864075927EFD4EE4826CACB861743FAB63EF493FA0B1DEE5DBB9615274551183096DC993333876786ABBFFFFC2B79BB55923C8275C2E8949ECD4E29019D9B42E84D4A835FBFFA85BE7DF3E30FC975A1B6E4736BF73ADAA1A776297DF0BEBC60CCE50FA0B89B29915BE3CCDACF72A3182F0C3B3F3DFD959D9D3140088A5884241F83F64241B5C0E5DCE81C4A1FB85C9A02A46BF6F14D56A1925BAEC0953C8794665C9512AEB8E72BEE60D62C5708E161EB29B99482635619C835255C6BE3B9C79C2F3E39C8BC357A9395B8C1E5FDAE04B45B73E9A0A9E5A237FFDAB24ECF6359AC776CA1F2E0BC512F043C7BDDF0C4C6EEDFC4764D76C3E43532EE77B1EA8ACD942E8CA1641CE7622E6DB439C6F3AC8213E066087342F68D4F3AA1A09EE2DF099907E983855443F096CB13F221ACA4C87F87DDBDF90374AA8394C37431617CB7B7815B1FAC29C1FADD47583745DC1494B07D3F3676ECDC063E758DEF82C0E75B8CCD57123A31B067DDE3FF160015858D42C9926FDF83DEF88794E223250BB185A2DD69503F69817D854EDE86519084F5A7333DB34839171A6C93C044F2934344AD37E7E89A70FB15D5B819F85E0A8E923E87BA7DE2D13E9D679751DFA8ACEED4B6A3D981964E96BC2C91B2418B373B24ABFB7BFE2A7BB9D8558DC172F784E6BB6CBB48DE58BE81D15B0C8D992E8475BE153225F3424DCCC6FC1FE0B68D36A078ACE79EF1D6383EEF9DF2A1FE8B673382EBB95C60790AB4AF2A852EA3BAE7275ED598E592DB27FA646E6450FA50AF3DE75DB7C9D0BFDE9922246C94F698A641773496A38E1F73FE9C64C7265DF44EBA2389268D5C8E5F4D13FDD4269420358FA2A8B4B3731ED42C1ACCB22F722E05D6DB1B2CB9166B70BE1E8A146F84F3D18DF6FFB95D9873853C7EC5FCE7433D68F12500B289D9AC05D8EF1AF0FA91DBFC81DB9F14DFFE3C44FADE213E9D354747F4A1095DAB2CA5C50A17F7757AF544FFC6D93D157CC2865F6CC91538B1E921E2F79B863C2AA9076D6D6EF4DAB4046339C38C5A9311FF4BF0BC40562E2D1E20CF3DBECEC1B9EAA2FDCC6540936BB582E246DF055F067FE91CA895DC0DEB4DD8F3F1AB0B6A3FE7E4AE8C2BF76F9480690A2C01EEF46F41C8A2CB7B31D5DF218828907780FB5587E28706C26DB0C606E9D6E8AF046AE8BB8212746C8A7BC09B04C1DC9DCEF82382BC3C37FCBE780F1B9EEFDAB97518E4F841ECD39E5C09BEB15CB906A3F78FBF4258FC19F2E61F000000FFFF03008574340FB80C0000</value>
+  </data>
+  <data name="SampleResourceEdmx" xml:space="preserve">
+    <value>H4sIAAAAAAAAC8xX224bNxB9L9B/IPjUAo5oOy+tsZvAla3AaGQHWSfv1O5IJsrLhhdD+rY+9JP6Cx3uXbuWFSdFURgwltyZMzOHZ4arv//8K3m7VZI8gnXC6JSezU4pAZ2bQuhNSoNfv/qFvn3z4w/JdaG25HNr9zraoad2KX3wvrxgzOUPoLibKZFb48zaz3KjGC8MOz89/ZWdnTFACIpYhCQfg/ZCQbXA5dzoHEofuFyaAqRr9vFNVqGSW67AlTyHlGZclRKuuOcr7mDWLFcI4WHrKbmUgmNWGcg1JVxr47nHnC8+Oci8NXqTlbjB5f2uBLRbc+mgqeWiN//ask7PY1msd2yh8uC8US8EPHvd8MTG7t/Edk12w+Q1Mu53seqKzZQujKFkHOdiLm20OcbzrIIT4GYIc0L2jU86oaCe4t8JmQfpg4VUQ/CWyxPyIaykyH+H3b35A3Sqg5TDdDFhfLe3gVsfrCnB+t1HWDdF3BSUsH0/Nnbs3AY+dY3vgsDnW4zNVxI6MbBn3eP/FgAVhY1CyZJv34Pe+IeU4iMlC7GFot1pUD9pgX2FTt6GUZCE9aczPbNIORcabJPARPKTQ0StN+fomnD7FdW4GfheCo6SPoe6feLRPp1nl1HfqKzu1Laj2YGWTpa8LJGyQYs3OySr+3v+Knu52FWNwXL3hOa7bLtI3li+gdFbDI2ZLoR1vhUyJfNCTczG/B/gto02oHis557x1jg+753yof6LZzOC67lcYHkKtK8qhS6juucnXtWY5ZLbJ/pkbmRQ+lCvPeddt8nQv96ZIiRslPaYpkF3NJajjh9z/pxkxyZd9E66I4kmjVyOX00T/dQmlCA1j6KotLNzHtQsGsyyL3IuBdbbGyy5Fmtwvh6KFG+E89GN9v+5XZhzhTx+xfznQz1o8SUAsonZrAXY7xrw+pHb/IHbnxTf/jxE+t4hPp01R0f0oQldqyylxQoX93V69UT/xtk9FXzChl9syRU4sekh4vebhjwqqQdtbW702rQEYznDjFqTEf9L8LxAVi4tHiDPPb7Owbnqov3MZUCTa7WC4kbfBV8Gf+kcqJXcDetN2PPxqwtqP+fkrowr92+UgGkKLAHu9G9ByKLLezHV3yGIKJB3gPtVh+KHBsJtsMYG6dborwRq6LuCEnRsinvAmwTB3J3O+COCvDw3/L54Dxue79q5dRjk+EHs055cCb6xXLkGo/ePv0JY/Bny5h8AAAD//wMAhXQ0D7gMAAA=</value>
+  </data>
+  <data name="SampleXmlEdmx" xml:space="preserve">
+    <value>&lt;Edmx Version="3.0" xmlns="http://schemas.microsoft.com/ado/2009/11/edmx"&gt;
+  &lt;Runtime&gt;
+    &lt;ConceptualModels&gt;
+      &lt;Schema Namespace="SampleDatabase.SampleDbContext" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm"&gt;
+        &lt;EntityType Name="Foo" customannotation:ClrType="SampleDatabase.SampleDbContext.Entities.Foo, SampleDatabase, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"&gt;
+          &lt;Key&gt;
+            &lt;PropertyRef Name="Id" /&gt;
+          &lt;/Key&gt;
+          &lt;Property Name="Id" Type="Guid" Nullable="false" /&gt;
+          &lt;Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" /&gt;
+        &lt;/EntityType&gt;
+        &lt;EntityContainer Name="SampleDbContext" customannotation:UseClrTypes="true"&gt;
+          &lt;EntitySet Name="Foos" EntityType="Self.Foo" /&gt;
+        &lt;/EntityContainer&gt;
+      &lt;/Schema&gt;
+    &lt;/ConceptualModels&gt;
+    &lt;Mappings&gt;
+      &lt;Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs"&gt;
+        &lt;EntityContainerMapping StorageEntityContainer="CodeFirstDatabase" CdmEntityContainer="SampleDbContext"&gt;
+          &lt;EntitySetMapping Name="Foos"&gt;
+            &lt;EntityTypeMapping TypeName="SampleDatabase.SampleDbContext.Foo"&gt;
+              &lt;MappingFragment StoreEntitySet="Foo"&gt;
+                &lt;ScalarProperty Name="Id" ColumnName="Id" /&gt;
+                &lt;ScalarProperty Name="Name" ColumnName="Name" /&gt;
+              &lt;/MappingFragment&gt;
+            &lt;/EntityTypeMapping&gt;
+          &lt;/EntitySetMapping&gt;
+        &lt;/EntityContainerMapping&gt;
+      &lt;/Mapping&gt;
+    &lt;/Mappings&gt;
+    &lt;StorageModels&gt;
+      &lt;Schema Namespace="CodeFirstDatabaseSchema" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl"&gt;
+        &lt;EntityType Name="Foo"&gt;
+          &lt;Key&gt;
+            &lt;PropertyRef Name="Id" /&gt;
+          &lt;/Key&gt;
+          &lt;Property Name="Id" Type="uniqueidentifier" Nullable="false" /&gt;
+          &lt;Property Name="Name" Type="nvarchar(max)" Nullable="true" /&gt;
+        &lt;/EntityType&gt;
+        &lt;EntityContainer Name="CodeFirstDatabase"&gt;
+          &lt;EntitySet Name="Foo" EntityType="Self.Foo" Schema="dbo" Table="Foos" /&gt;
+        &lt;/EntityContainer&gt;
+      &lt;/Schema&gt;
+    &lt;/StorageModels&gt;
+  &lt;/Runtime&gt;
+  &lt;Designer&gt;
+    &lt;Connection&gt;
+      &lt;DesignerInfoPropertySet&gt;
+        &lt;DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" /&gt;
+      &lt;/DesignerInfoPropertySet&gt;
+    &lt;/Connection&gt;
+    &lt;Options&gt;
+      &lt;DesignerInfoPropertySet&gt;
+        &lt;DesignerProperty Name="ValidateOnBuild" Value="False" /&gt;
+        &lt;DesignerProperty Name="CodeGenerationStrategy" Value="None" /&gt;
+        &lt;DesignerProperty Name="ProcessDependentTemplatesOnSave" Value="False" /&gt;
+        &lt;DesignerProperty Name="UseLegacyProvider" Value="False" /&gt;
+      &lt;/DesignerInfoPropertySet&gt;
+    &lt;/Options&gt;
+    &lt;Diagrams /&gt;
+  &lt;/Designer&gt;
+&lt;/Edmx&gt;</value>
+  </data>
+</root>
