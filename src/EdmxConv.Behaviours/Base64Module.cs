@@ -13,10 +13,9 @@ namespace EdmxConv.Behaviours
                 var byteArray = Convert.FromBase64String(resourceEdmx.Value).ToByteArray();
                 return Result.Ok(byteArray);
             }
-            catch (Exception e)
+            catch (FormatException)
             {
-                Console.WriteLine(e);
-                throw;
+                return Result.Fail<ByteArray>("Cannot convert given EDMX. Length does not match.");
             }
         }
 

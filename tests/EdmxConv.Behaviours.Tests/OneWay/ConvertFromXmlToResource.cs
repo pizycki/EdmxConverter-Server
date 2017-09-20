@@ -12,7 +12,7 @@ namespace EdmxConv.Behaviours.Tests.OneWay
         [Fact(DisplayName = "Xml -> Resx")]
         public void convert_xml_to_resource() =>
             With(Resources.SampleXmlEdmx)
-                .Map(sample => sample.ToXmlEdmx())
+                .OnSuccess(sample => sample.ToXmlEdmx())
                 .OnSuccess(edmx => ConvertModule.ConvertToResource(edmx))
                 .Map(edmx => edmx.ToString())
                 .OnSuccess(edmx => edmx.ShouldBe(Resources.SampleResourceEdmx));

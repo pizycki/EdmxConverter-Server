@@ -12,7 +12,7 @@ namespace EdmxConv.Behaviours.Tests.OneWay
         [Fact(DisplayName = "Resx -> DB")]
         public void convert_from_resource_to_database() =>
             With(Resources.SampleResourceEdmx)
-                .Map(sample => sample.ToResourceEdmx())
+                .OnSuccess(sample => sample.ToResourceEdmx())
                 .OnSuccess(edmx => ConvertModule.ConvertToDatabase(edmx))
                 .Map(edmx => edmx.ToString())
                 .OnSuccess(edmx => edmx.ShouldBe(Resources.SampleDatabaseEdmx));

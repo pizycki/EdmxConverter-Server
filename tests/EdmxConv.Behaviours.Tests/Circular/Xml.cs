@@ -23,7 +23,7 @@ namespace EdmxConv.Behaviours.Tests.Circular
         [Fact(DisplayName = "Xml -> DB -> Xml")]
         public void convert_xml_to_database_back_and_forth() =>
             With(Resources.SampleXmlEdmx)
-                .Map(sample => sample.ToXmlEdmx())
+                .OnSuccess(sample => sample.ToXmlEdmx())
                 .OnSuccess(edmx => ConvertModule.ConvertToDatabase(edmx))
                 .OnSuccess(edmx => edmx.GetAs<DatabaseEdmx>())
                 .OnSuccess(edmx => ConvertModule.ConvertToXml(edmx))

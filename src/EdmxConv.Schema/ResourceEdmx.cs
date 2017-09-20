@@ -1,4 +1,8 @@
-﻿namespace EdmxConv.Schema
+﻿using CSharpFunctionalExtensions;
+using EdmxConv.Schema.Extensions;
+using static EdmxConv.Core.FlowHelpers;
+
+namespace EdmxConv.Schema
 {
     public sealed class ResourceEdmx : Edmx
     {
@@ -13,5 +17,9 @@
             Value = value;
 
         public override string ToString() => Value;
+
+        public static Result<ResourceEdmx> Create(string edmx) =>
+            With(edmx)
+                .OnSuccess(x => x.ToResourceEdmx());
     }
 }

@@ -1,4 +1,6 @@
-﻿using EdmxConv.Schema.Extensions;
+﻿using CSharpFunctionalExtensions;
+using EdmxConv.Schema.Extensions;
+using static EdmxConv.Core.FlowHelpers;
 
 namespace EdmxConv.Schema
 {
@@ -19,5 +21,11 @@ namespace EdmxConv.Schema
         }
 
         public override string ToString() => Value.Value;
+
+        public static Result<DatabaseEdmx> Create(string edmx) =>
+            With(edmx)
+                .OnSuccess(x => x.ToHex())
+                .OnSuccess(x => x.ToDatabaseEdmx());
+
     }
 }

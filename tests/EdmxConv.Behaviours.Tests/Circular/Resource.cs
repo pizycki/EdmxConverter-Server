@@ -13,7 +13,7 @@ namespace EdmxConv.Behaviours.Tests.Circular
         [Fact(DisplayName = "Resx -> Xml -> Resx")]
         public void convert_resource_to_xml_back_and_forth() =>
             With(Resources.SampleResourceEdmx)
-                .Map(edmx => edmx.ToResourceEdmx())
+                .OnSuccess(edmx => edmx.ToResourceEdmx())
                 .OnSuccess(edmx => ConvertModule.ConvertToXml(edmx))
                 .OnSuccess(edmx => edmx.GetAs<XmlEdmx>())
                 .OnSuccess(edmx => ConvertModule.ConvertToResource(edmx))
@@ -23,7 +23,7 @@ namespace EdmxConv.Behaviours.Tests.Circular
         [Fact(DisplayName = "Resx -> DB -> Resx")]
         public void convert_resource_to_database_back_and_forth() =>
             With(Resources.SampleResourceEdmx)
-                .Map(edmx => edmx.ToResourceEdmx())
+                .OnSuccess(edmx => edmx.ToResourceEdmx())
                 .OnSuccess(edmx => ConvertModule.ConvertToDatabase(edmx))
                 .OnSuccess(edmx => edmx.GetAs<DatabaseEdmx>())
                 .OnSuccess(edmx => ConvertModule.ConvertToResource(edmx))

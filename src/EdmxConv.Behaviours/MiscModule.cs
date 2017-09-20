@@ -1,26 +1,26 @@
 ﻿using System;
 using System.Linq;
 using CSharpFunctionalExtensions;
-using EdmxConv.Core;
 using EdmxConv.Schema;
 using EdmxConv.Schema.Extensions;
+using static EdmxConv.Core.FlowHelpers;
 
 namespace EdmxConv.Behaviours
 {
     public class MiscModule
     {
         public static Result<XmlEdmx> GZipToXml(GZipBinary gzip) =>
-            FlowHelpers.With(gzip)
+            With(gzip)
                 .Map(edmx => edmx.ByteArray.Bytes)
                 .OnSuccess(edmx => GzipModule.Decompress(edmx))
                 .Map(edmx => edmx.ToXml());
 
         public static Result<ResourceEdmx> HexToBase64(DatabaseEdmx databaseEdmx) =>
-            FlowHelpers.With(databaseEdmx)
-                .OnSuccess(edmx => HexModule.CutOffHexPrefix(databaseEdmx.Value))
+            With(databaseEdmx)
+                .Map(edmx => HexModule.CutOffHexPrefix(databaseEdmx.Value))
                 .Map(HexToBytes)
                 .OnSuccess(edmx => Base64Module.BytesToBase64(edmx))
-                .Map(base64 => base64.ToResourceEdmx());
+                .OnSuccess(base64 => base64.ToResourceEdmx());
 
 
         public static ByteArray HexToBytes(Hex hex) =>
@@ -35,7 +35,7 @@ namespace EdmxConv.Behaviours
                 .Map(bytes => new GZipBinary(bytes));
 
         public static Result<ResourceEdmx> GZipToBase64(GZipBinary source) =>
-            FlowHelpers.With(source)
+            With(source)
                 .OnSuccess(edmx => Base64Module.BytesToBase64(edmx.ByteArray)
                 .OnSuccess(base64 => new ResourceEdmx(base64)));
 
