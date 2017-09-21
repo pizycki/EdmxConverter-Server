@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using CSharpFunctionalExtensions;
+using EdmxConv.Core;
 using EdmxConv.Schema;
 using EdmxConv.Schema.Extensions;
 using static EdmxConv.Core.FlowHelpers;
@@ -18,22 +19,9 @@ namespace EdmxConv.Behaviours
         public static Result<ResourceEdmx> HexToBase64(DatabaseEdmx databaseEdmx) =>
             With(databaseEdmx)
                 .Map(edmx => HexModule.CutOffHexPrefix(databaseEdmx.Value))
-                .OnSuccess(edmx => TryHexToBytes(edmx))
+                .OnSuccessTry<Hex, ByteArray, FormatException>(edmx => HexToBytes(edmx), "Invalid hexidecimal format.")
                 .OnSuccess(edmx => Base64Module.BytesToBase64(edmx))
                 .OnSuccess(base64 => base64.ToResourceEdmx());
-
-        public static Result<ByteArray> TryHexToBytes(Hex hex)
-        {
-            try
-            {
-                var byteArray = HexToBytes(hex);
-                return Result.Ok(byteArray);
-            }
-            catch (FormatException)
-            {
-                return Result.Fail<ByteArray>("Invalid hexidecimal format.");
-            }
-        }
 
         public static ByteArray HexToBytes(Hex hex) =>
             Enumerable.Range(0, hex.Value.Length)
@@ -58,32 +46,16 @@ namespace EdmxConv.Behaviours
                 .Map(edmx => edmx.ToHex())
                 .OnSuccess(edmx => HexModule.AppendWithHexPrefix(edmx));
 
-        private static Result<string> ConvertBytesToUTF8String(ByteArray array)
-        {
-            try
-            {
-                var str = BitConverter.ToString(array.Bytes);
-                return Result.Ok(str);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-        }
+        private static Result<string> ConvertBytesToUTF8String(ByteArray array) =>
+            With(array)
+                .Map(edmx => edmx.Bytes)
+                .OnSuccess(edmx => BitConverter.ToString(edmx));
 
-        public static Result<GZipBinary> Base64ToGzip(ResourceEdmx resourceEdmx)
-        {
-            try
-            {
-                var gZipBinary = Convert.FromBase64String(resourceEdmx.Value).ToGZipBinary();
-                return Result.Ok(gZipBinary);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-        }
+        public static Result<GZipBinary> Base64ToGzip(ResourceEdmx resourceEdmx) =>
+            With(resourceEdmx)
+                .Map(edmx => edmx.Value)
+                .OnSuccess(x => Convert.FromBase64String(x))
+                .Map(edmx => edmx.ToGZipBinary());
+
     }
 }

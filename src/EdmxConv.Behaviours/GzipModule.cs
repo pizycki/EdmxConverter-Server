@@ -3,28 +3,23 @@ using System.IO;
 using System.IO.Compression;
 using System.Xml.Linq;
 using CSharpFunctionalExtensions;
+using EdmxConv.Core;
+using static EdmxConv.Core.FlowHelpers;
 
 namespace EdmxConv.Behaviours
 {
     public class GzipModule
     {
-        public static Result<XDocument> Decompress(byte[] bytes)
+        public static Result<XDocument> Decompress(byte[] bytes) =>
+            With(bytes)
+                .OnSuccessTry<byte[], XDocument, InvalidDataException>(edmx =>
+                    DecompressUnsafe(edmx), "Corrupted GZip file. Cannot uncompress.");
+
+        public static XDocument DecompressUnsafe(byte[] bytes)
         {
-            try
-            {
-                using (var memoryStream = new MemoryStream(bytes))
-                {
-                    using (var gzipStream = new GZipStream(memoryStream, CompressionMode.Decompress))
-                    {
-                        var document = XDocument.Load(gzipStream);
-                        return Result.Ok(document);
-                    }
-                }
-            }
-            catch (InvalidDataException)
-            {
-                return Result.Fail<XDocument>("Corrupted GZip file. Cannot uncompress.");
-            }
+            using (var memoryStream = new MemoryStream(bytes))
+            using (var gzipStream = new GZipStream(memoryStream, CompressionMode.Decompress))
+                return XDocument.Load(gzipStream);
         }
 
         public static Result<byte[]> Compress(XDocument document)
