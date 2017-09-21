@@ -1,4 +1,5 @@
-﻿using CSharpFunctionalExtensions;
+﻿using System;
+using CSharpFunctionalExtensions;
 using EdmxConv.Schema.Extensions;
 using static EdmxConv.Core.FlowHelpers;
 
@@ -18,8 +19,6 @@ namespace EdmxConv.Schema
 
         public override string ToString() => Value;
 
-        public static Result<ResourceEdmx> Create(string edmx) =>
-            With(edmx)
-                .OnSuccess(x => x.ToResourceEdmx());
+        public static Result<ResourceEdmx> Create(string edmx) => Result.Ok(new ResourceEdmx(edmx));
     }
 }

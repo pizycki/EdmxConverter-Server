@@ -15,7 +15,7 @@ namespace EdmxConv.Behaviours
             }
             catch (FormatException)
             {
-                return Result.Fail<ByteArray>("Cannot convert given EDMX. Length does not match.");
+                return Result.Fail<ByteArray>("Cannot convert given EDMX. Format of BASE64 is invalid.");
             }
         }
 

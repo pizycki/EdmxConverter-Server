@@ -18,10 +18,22 @@ namespace EdmxConv.Behaviours
         public static Result<ResourceEdmx> HexToBase64(DatabaseEdmx databaseEdmx) =>
             With(databaseEdmx)
                 .Map(edmx => HexModule.CutOffHexPrefix(databaseEdmx.Value))
-                .Map(HexToBytes)
+                .OnSuccess(edmx => TryHexToBytes(edmx))
                 .OnSuccess(edmx => Base64Module.BytesToBase64(edmx))
                 .OnSuccess(base64 => base64.ToResourceEdmx());
 
+        public static Result<ByteArray> TryHexToBytes(Hex hex)
+        {
+            try
+            {
+                var byteArray = HexToBytes(hex);
+                return Result.Ok(byteArray);
+            }
+            catch (FormatException)
+            {
+                return Result.Fail<ByteArray>("Invalid hexidecimal format.");
+            }
+        }
 
         public static ByteArray HexToBytes(Hex hex) =>
             Enumerable.Range(0, hex.Value.Length)
