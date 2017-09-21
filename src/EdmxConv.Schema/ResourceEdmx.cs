@@ -1,7 +1,4 @@
-﻿using System;
-using CSharpFunctionalExtensions;
-using EdmxConv.Schema.Extensions;
-using static EdmxConv.Core.FlowHelpers;
+﻿using CSharpFunctionalExtensions;
 
 namespace EdmxConv.Schema
 {

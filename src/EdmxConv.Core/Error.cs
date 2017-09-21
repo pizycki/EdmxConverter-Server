@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace EdmxConv.Core
+﻿namespace EdmxConv.Core
 {
     public struct Error
     {

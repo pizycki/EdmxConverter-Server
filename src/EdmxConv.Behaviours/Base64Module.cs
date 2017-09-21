@@ -1,6 +1,7 @@
 ﻿using System;
 using CSharpFunctionalExtensions;
 using EdmxConv.Schema;
+using EdmxConv.Schema.Extensions;
 
 namespace EdmxConv.Behaviours
 {
