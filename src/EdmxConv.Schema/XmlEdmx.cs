@@ -1,6 +1,8 @@
 ﻿using System.Xml;
 using System.Xml.Linq;
 using CSharpFunctionalExtensions;
+using EdmxConv.Core;
+using static EdmxConv.Core.FlowHelpers;
 
 namespace EdmxConv.Schema
 {
@@ -16,17 +18,9 @@ namespace EdmxConv.Schema
             : base(EdmxTypeEnum.Xml) =>
             Value = document;
 
-        public static Result<XmlEdmx> Create(string plainXml)
-        {
-            try
-            {
-                return Result.Ok(new XmlEdmx(plainXml));
-            }
-            catch (XmlException)
-            {
-                return Result.Fail<XmlEdmx>("Invalid XML.");
-            }
-        }
+        public static Result<XmlEdmx> Create(string plainXml) =>
+            With(plainXml)
+                .OnSuccessTry<string, XmlEdmx, XmlException>(xml => new XmlEdmx(xml), "Invalid XML.");
 
         public override string ToString() => Value.ToString();
     }

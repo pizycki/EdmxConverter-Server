@@ -37,7 +37,5 @@ namespace EdmxConv.Behaviours.Tests.Validation
                   result.IsFailure.ShouldBeTrue();
                   return result;
               });
-
-
     }
 }
