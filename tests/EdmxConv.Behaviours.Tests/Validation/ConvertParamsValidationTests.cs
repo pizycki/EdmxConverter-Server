@@ -9,7 +9,7 @@ namespace EdmxConv.Behaviours.Tests.Validation
 {
     public class ConvertParamsValidationTests
     {
-        [Theory]
+        [Theory(DisplayName = "Do not validate missing source EDMX.")]
         [InlineData("")]
         [InlineData(null)]
         public void should_not_validate_params_with_empty_string_edmx(string edmx) =>
@@ -21,7 +21,7 @@ namespace EdmxConv.Behaviours.Tests.Validation
                     return result;
                 });
 
-        [Theory]
+        [Theory(DisplayName = "Do not validate the same source and target type.")]
         [InlineData(EdmxTypeEnum.Database)]
         [InlineData(EdmxTypeEnum.Xml)]
         [InlineData(EdmxTypeEnum.Resource)]

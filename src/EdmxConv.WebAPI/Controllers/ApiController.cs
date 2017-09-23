@@ -1,18 +1,18 @@
 ﻿using CSharpFunctionalExtensions;
-using Microsoft.AspNetCore.Mvc;
+using System.Web.Http;
 
 namespace EdmxConv.WebAPI.Controllers
 {
-    public abstract class ApiController : Controller
+    public abstract class BaseApiController : ApiController
     {
-        protected IActionResult MapToHttpResponse<T>(Result<T> result) =>
+        protected IHttpActionResult MapToHttpResponse<T>(Result<T> result) =>
             result.IsSuccess
-                ? (IActionResult)Ok(result.Value)
-                : (IActionResult)BadRequest(result.Error);
+                ? (IHttpActionResult)Ok(result.Value)
+                : (IHttpActionResult)BadRequest(result.Error);
 
-        protected IActionResult MapToHttpResponse(Result result) =>
+        protected IHttpActionResult MapToHttpResponse(Result result) =>
             result.IsSuccess
-                ? (IActionResult)Ok()
-                : (IActionResult)BadRequest(result.Error);
+                ? (IHttpActionResult)Ok()
+                : (IHttpActionResult)BadRequest(result.Error);
     }
 }

@@ -1,19 +1,85 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FD45A1DE-3BE9-4119-A7B0-7A74939F99B5}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
-    <ApplicationIcon />
-    <StartupObject />
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EdmxConv.Behaviours</RootNamespace>
+    <AssemblyName>EdmxConv.Behaviours</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
-
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="CSharpFunctionalExtensions" Version="1.7.1" />
+    <Reference Include="CSharpFunctionalExtensions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CSharpFunctionalExtensions.1.7.1\lib\netstandard1.0\CSharpFunctionalExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="NullGuard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1ca091877d12ca03, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NullGuard.Fody.1.6.0\lib\netstandard1.0\NullGuard.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
-
   <ItemGroup>
-    <ProjectReference Include="..\EdmxConv.Core\EdmxConv.Core.csproj" />
-    <ProjectReference Include="..\EdmxConv.Schema\EdmxConv.Schema.csproj" />
+    <Compile Include="Assembly.cs" />
+    <Compile Include="Base64Module.cs" />
+    <Compile Include="ConvertEdmxArgsModule.cs" />
+    <Compile Include="ConvertModule.cs" />
+    <Compile Include="ConvertParamsValidationModule.cs" />
+    <Compile Include="GzipModule.cs" />
+    <Compile Include="HexModule.cs" />
+    <Compile Include="MiscModule.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EdmxConv.Core\EdmxConv.Core.csproj">
+      <Project>{4959fb95-d02e-4a13-8706-5c9c2ca2e6eb}</Project>
+      <Name>EdmxConv.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EdmxConv.Schema\EdmxConv.Schema.csproj">
+      <Project>{f439e1a8-b82a-414f-821c-8b832d4e4a86}</Project>
+      <Name>EdmxConv.Schema</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FodyWeavers.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\..\packages\Fody.2.1.2\build\netstandard1.0\Fody.targets" Condition="Exists('..\..\packages\Fody.2.1.2\build\netstandard1.0\Fody.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\Fody.2.1.2\build\netstandard1.0\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Fody.2.1.2\build\netstandard1.0\Fody.targets'))" />
+  </Target>
 </Project>
