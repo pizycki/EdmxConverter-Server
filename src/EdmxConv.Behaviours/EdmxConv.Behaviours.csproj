@@ -49,13 +49,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assembly.cs" />
-    <Compile Include="Base64Module.cs" />
-    <Compile Include="ConvertEdmxArgsModule.cs" />
-    <Compile Include="ConvertModule.cs" />
-    <Compile Include="ConvertParamsValidationModule.cs" />
-    <Compile Include="GzipModule.cs" />
-    <Compile Include="HexModule.cs" />
-    <Compile Include="MiscModule.cs" />
+    <Compile Include="Modules\Base64Module.cs" />
+    <Compile Include="Modules\ConvertEdmxArgsModule.cs" />
+    <Compile Include="Modules\ConvertModule.cs" />
+    <Compile Include="Modules\ConvertParamsValidationModule.cs" />
+    <Compile Include="Modules\GzipModule.cs" />
+    <Compile Include="Modules\HexModule.cs" />
+    <Compile Include="Modules\MiscModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
