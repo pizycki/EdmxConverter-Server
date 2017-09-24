@@ -2,7 +2,7 @@
 
 namespace EdmxConv.WebAPI.Controllers
 {
-    [Route("api/hearbeat")]
+    [RoutePrefix("api/heartbeat")]
     public class HeartbeatController : BaseApiController
     {
         [HttpGet, Route("")]
