@@ -1,4 +1,5 @@
 ﻿using CSharpFunctionalExtensions;
+using EdmxConv.Behaviours.Modules;
 using EdmxConv.Behaviours.Tests.Properties;
 using EdmxConv.Schema.Extensions;
 using Shouldly;

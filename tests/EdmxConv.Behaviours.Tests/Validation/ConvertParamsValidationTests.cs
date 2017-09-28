@@ -1,4 +1,5 @@
 ﻿using CSharpFunctionalExtensions;
+using EdmxConv.Behaviours.Modules;
 using EdmxConv.Schema;
 using EdmxConv.Schema.DTO;
 using Shouldly;

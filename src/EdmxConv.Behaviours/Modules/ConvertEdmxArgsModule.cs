@@ -5,14 +5,13 @@ using EdmxConv.Core;
 using EdmxConv.Schema;
 using EdmxConv.Schema.DTO;
 using EdmxConv.Schema.Extensions;
-using static EdmxConv.Core.FlowHelpers;
 
-namespace EdmxConv.Behaviours
+namespace EdmxConv.Behaviours.Modules
 {
     public class ConvertEdmxArgsModule
     {
         public static Result<ConvertEdmxArgs> CreateArguments(ConvertParams convParams) =>
-            With(convParams)
+            FlowHelpers.With(convParams)
                 .OnSuccess(GetEdmxMapper())
                 .OnSuccess(MapEdmx(convParams))
                 .OnSuccess(Convert(convParams));

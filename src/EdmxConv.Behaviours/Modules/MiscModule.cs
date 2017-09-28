@@ -4,20 +4,19 @@ using CSharpFunctionalExtensions;
 using EdmxConv.Core;
 using EdmxConv.Schema;
 using EdmxConv.Schema.Extensions;
-using static EdmxConv.Core.FlowHelpers;
 
-namespace EdmxConv.Behaviours
+namespace EdmxConv.Behaviours.Modules
 {
     public class MiscModule
     {
         public static Result<XmlEdmx> GZipToXml(GZipBinary gzip) =>
-            With(gzip)
+            FlowHelpers.With(gzip)
                 .Map(edmx => edmx.ByteArray.Bytes)
                 .OnSuccess(edmx => GzipModule.Decompress(edmx))
                 .Map(edmx => edmx.ToXml());
 
         public static Result<ResourceEdmx> HexToBase64(DatabaseEdmx databaseEdmx) =>
-            With(databaseEdmx)
+            FlowHelpers.With(databaseEdmx)
                 .Map(edmx => HexModule.CutOffHexPrefix(databaseEdmx.Value))
                 .OnSuccessTry<Hex, ByteArray, FormatException>(edmx => HexToBytes(edmx), "Invalid hexidecimal format.")
                 .OnSuccess(edmx => Base64Module.BytesToBase64(edmx))
@@ -35,7 +34,7 @@ namespace EdmxConv.Behaviours
                 .Map(bytes => new GZipBinary(bytes));
 
         public static Result<ResourceEdmx> GZipToBase64(GZipBinary source) =>
-            With(source)
+            FlowHelpers.With(source)
                 .OnSuccess(edmx => Base64Module.BytesToBase64(edmx.ByteArray)
                 .OnSuccess(base64 => new ResourceEdmx(base64)));
 
@@ -47,12 +46,12 @@ namespace EdmxConv.Behaviours
                 .OnSuccess(edmx => HexModule.AppendWithHexPrefix(edmx));
 
         private static Result<string> ConvertBytesToUTF8String(ByteArray array) =>
-            With(array)
+            FlowHelpers.With(array)
                 .Map(edmx => edmx.Bytes)
                 .OnSuccess(edmx => BitConverter.ToString(edmx));
 
         public static Result<GZipBinary> Base64ToGzip(ResourceEdmx resourceEdmx) =>
-            With(resourceEdmx)
+            FlowHelpers.With(resourceEdmx)
                 .Map(edmx => edmx.Value)
                 .OnSuccess(x => Convert.FromBase64String(x))
                 .Map(edmx => edmx.ToGZipBinary());

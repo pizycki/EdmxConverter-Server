@@ -2,6 +2,7 @@
 using EdmxConv.Behaviours;
 using EdmxConv.Schema.DTO;
 using System.Web.Http;
+using EdmxConv.Behaviours.Modules;
 using EdmxConv.Schema;
 
 namespace EdmxConv.WebAPI.Controllers
@@ -17,21 +18,24 @@ namespace EdmxConv.WebAPI.Controllers
                 .Map(edmx => edmx.ToString())
                 .OnBoth(MapToHttpResponse);
 
-        [HttpGet, Route("targets")]
-        public IHttpActionResult Targets() => Ok(new dynamic[]
-        {
-            new { Name = "XML",      Type = EdmxTypeEnum.Xml },
-            new { Name = "Resource", Type = EdmxTypeEnum.Resource },
-            new { Name = "Database", Type = EdmxTypeEnum.Database }
-        });
+        [HttpGet, Route("configuration")]
+        public IHttpActionResult GetConfiguration() =>
+            Ok(new
+            {
+                Sources = new dynamic[]
+                {
+                    new { Name = "XML",      Type = EdmxTypeEnum.Xml },
+                    new { Name = "Resource", Type = EdmxTypeEnum.Resource },
+                    new { Name = "Database", Type = EdmxTypeEnum.Database }
+                },
 
-        [HttpGet, Route("sources")]
-        public IHttpActionResult Sources() => Ok(new dynamic[]
-        {
-            new { Name = "XML",      Type = EdmxTypeEnum.Xml },
-            new { Name = "Resource", Type = EdmxTypeEnum.Resource },
-            new { Name = "Database", Type = EdmxTypeEnum.Database }
-        });
+                Targets = new dynamic[]
+                {
+                    new { Name = "XML",      Type = EdmxTypeEnum.Xml },
+                    new { Name = "Resource", Type = EdmxTypeEnum.Resource },
+                    new { Name = "Database", Type = EdmxTypeEnum.Database }
+                },
+            });
 
     }
 }

@@ -1,7 +1,7 @@
 ﻿using EdmxConv.Schema;
 using EdmxConv.Schema.Extensions;
 
-namespace EdmxConv.Behaviours
+namespace EdmxConv.Behaviours.Modules
 {
     public class HexModule
     {

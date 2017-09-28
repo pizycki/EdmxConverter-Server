@@ -4,14 +4,13 @@ using System.IO.Compression;
 using System.Xml.Linq;
 using CSharpFunctionalExtensions;
 using EdmxConv.Core;
-using static EdmxConv.Core.FlowHelpers;
 
-namespace EdmxConv.Behaviours
+namespace EdmxConv.Behaviours.Modules
 {
     public class GzipModule
     {
         public static Result<XDocument> Decompress(byte[] bytes) =>
-            With(bytes)
+            FlowHelpers.With(bytes)
                 .OnSuccessTry<byte[], XDocument, InvalidDataException>(edmx =>
                     DecompressUnsafe(edmx), "Corrupted GZip file. Cannot uncompress.");
 
