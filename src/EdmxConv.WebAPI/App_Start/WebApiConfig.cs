@@ -1,4 +1,5 @@
 ﻿using System.Web.Http;
+using Newtonsoft.Json.Serialization;
 
 namespace EdmxConv.WebAPI
 {
@@ -8,6 +9,8 @@ namespace EdmxConv.WebAPI
         {
             // Web API configuration and services
             config.EnableCors();
+            config.UseCamelCaseInHttpResponses();
+
 
             // Web API routes
             config.MapHttpAttributeRoutes();
@@ -17,6 +20,16 @@ namespace EdmxConv.WebAPI
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+        }
+    }
+
+    public static class HttpResposneFormatConfiguration
+    {
+        public static HttpConfiguration UseCamelCaseInHttpResponses(this HttpConfiguration config)
+        {
+            config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            config.Formatters.JsonFormatter.UseDataContractJsonSerializer = false;
+            return config;
         }
     }
 }
