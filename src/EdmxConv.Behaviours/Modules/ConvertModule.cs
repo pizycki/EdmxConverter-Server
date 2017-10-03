@@ -4,13 +4,14 @@ using CSharpFunctionalExtensions;
 using EdmxConv.Core;
 using EdmxConv.Schema;
 using EdmxConv.Schema.Extensions;
+using static EdmxConv.Core.FlowHelpers;
 
 namespace EdmxConv.Behaviours.Modules
 {
     public static class ConvertModule
     {
         public static Result<Edmx> Convert(ConvertEdmxArgs args) =>
-            FlowHelpers.With(args)
+            With(args)
                 .OnSuccess(a => Direction.Create(args.Source, args.Target))
                 .OnSuccess(d => Converters.GetMaybe(d).ToResult("Unsupported convertion."))
                 .OnSuccess(conv => conv(args.Model));

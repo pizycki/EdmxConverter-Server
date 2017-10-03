@@ -1,9 +1,12 @@
-﻿using CSharpFunctionalExtensions;
+﻿using System.Web;
+using CSharpFunctionalExtensions;
 using EdmxConv.Schema.DTO;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using EdmxConv.Behaviours.Modules;
+using EdmxConv.Core;
 using EdmxConv.Schema;
+using static EdmxConv.Core.FlowHelpers;
 
 namespace EdmxConv.WebAPI.Controllers
 {
@@ -16,8 +19,20 @@ namespace EdmxConv.WebAPI.Controllers
             ConvertParamsValidationModule.Validate(payload)
                 .OnSuccess(p => ConvertEdmxArgsModule.CreateArguments(p))
                 .OnSuccess(arg => ConvertModule.Convert(arg))
-                .Map(edmx => edmx.ToString())
+                .Map(edmx => (plain: edmx.ToString(), type: edmx.Type))
+                // This must stay here, because of reference to System.Web
+                .OnSuccessIf(condition: edmxWithType => edmxWithType.type == EdmxTypeEnum.Xml,
+                             func: edmxWithType =>
+                                With(edmxWithType.plain)
+                                    .OnSuccess(xml => EncodeHtml(xml))
+                                    .Map(xml => (plain: xml, type: EdmxTypeEnum.Xml)))
+                .Map(edmxWithType => edmxWithType.plain)
                 .OnBoth(MapToHttpResponse);
+
+        private static Result<string> EncodeHtml(string xml) =>
+            With(xml)
+                .OnSuccess(edmx => edmx.ToString())
+                .OnSuccess(edmx => HttpUtility.HtmlEncode(edmx));
 
         [HttpGet, Route("configuration")]
         public IHttpActionResult GetConfiguration() =>

@@ -49,6 +49,7 @@
     <Compile Include="DictionaryExtensions.cs" />
     <Compile Include="Error.cs" />
     <Compile Include="FlowHelpers.cs" />
+    <Compile Include="OnSuccessIfExtensions.cs" />
     <Compile Include="OnSuccessTryExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
