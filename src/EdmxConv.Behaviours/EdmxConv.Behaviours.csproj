@@ -56,7 +56,6 @@
     <Compile Include="Modules\ConvertParamsValidationModule.cs" />
     <Compile Include="Modules\GzipModule.cs" />
     <Compile Include="Modules\HexModule.cs" />
-    <Compile Include="Modules\HtmlModule.cs" />
     <Compile Include="Modules\MiscModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
