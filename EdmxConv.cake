@@ -58,6 +58,7 @@ Task("UnitTest")
 
 Task("Publish-Local")
   .IsDependentOn("Clean")
+  .IsDependentOn("RestoreNugets")
   .Does(() => {
     MSBuild(solutionPath, settings =>
       settings.SetConfiguration(configuration)
