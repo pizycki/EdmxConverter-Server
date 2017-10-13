@@ -1,4 +1,5 @@
 #tool "nuget:?package=xunit.runner.console"
+#addin "Cake.WebDeploy"
 //////////////////////////////////////////////////////////////////////
 // ARGUMENTS
 //////////////////////////////////////////////////////////////////////
@@ -20,6 +21,8 @@ Task("Clean")
     .Does(() =>
 {
     CleanDirectories("./src/**/bin");
+    CleanDirectories("./src/**/published_website");
+    CleanDirectory("./artifacts", f => !f.Hidden && !f.Path.FullPath.Contains("keep") );
 });
 
 Task("RestoreNugets")
@@ -52,6 +55,30 @@ Task("UnitTest")
             OutputDirectory = "./build"
     });
 });
+
+Task("Publish-Local")
+  //.IsDependentOn("Clean")
+  .Does(() => {
+    MSBuild(solutionPath, settings =>
+      settings.SetConfiguration(configuration)
+          .WithProperty("DeployOnBuild", "true")
+          .WithProperty("PublishProfile", "Local"));
+
+    Zip("./src/EdmxConv.WebAPI/published", "./artifacts/published.zip");
+  });
+
+Task("Deploy-ToAzure")
+  .IsDependentOn("Publish-Local")
+  .Does(() => {
+      DeployWebsite(new DeploySettings()
+      {
+          SourcePath = "./artifacts/published.zip",
+          PublishUrl = "https://edmxconvapp.scm.azurewebsites.net:443",
+
+          Username = EnvironmentVariable("EDMX_AZURE_USER"),
+          Password = EnvironmentVariable("EDMX_AZURE_PASS")
+      });
+  });
 
 //////////////////////////////////////////////////////////////////////
 // TASK TARGETS

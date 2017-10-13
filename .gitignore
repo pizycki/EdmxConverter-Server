@@ -300,3 +300,4 @@ tools/**
 
 # OpenCover UI analysis results
 OpenCover/
+src/EdmxConv\.WebAPI/published/
