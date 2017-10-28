@@ -18,7 +18,7 @@ namespace EdmxConv.Behaviours.Modules
         public static Result<ResourceEdmx> HexToBase64(DatabaseEdmx databaseEdmx) =>
             FlowHelpers.With(databaseEdmx)
                 .Map(edmx => HexModule.CutOffHexPrefix(databaseEdmx.Value))
-                .OnSuccessTry<Hex, ByteArray, FormatException>(edmx => HexToBytes(edmx), "Invalid hexidecimal format.")
+                .OnSuccessTry<Hex, ByteArray, FormatException, ArgumentOutOfRangeException>(edmx => HexToBytes(edmx), "Invalid hexidecimal format.")
                 .OnSuccess(edmx => Base64Module.BytesToBase64(edmx))
                 .OnSuccess(base64 => base64.ToResourceEdmx());
 
