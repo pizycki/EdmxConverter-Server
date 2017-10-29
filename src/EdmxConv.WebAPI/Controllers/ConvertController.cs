@@ -2,7 +2,6 @@
 using CSharpFunctionalExtensions;
 using EdmxConv.Schema.DTO;
 using System.Web.Http;
-using System.Web.Http.Cors;
 using EdmxConv.Behaviours.Modules;
 using EdmxConv.Core;
 using EdmxConv.Schema;
@@ -11,7 +10,6 @@ using static EdmxConv.Core.FlowHelpers;
 namespace EdmxConv.WebAPI.Controllers
 {
     [RoutePrefix("api/convert")]
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ConvertController : BaseApiController
     {
         [HttpPost, Route("")]
