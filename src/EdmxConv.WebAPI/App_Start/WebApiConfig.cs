@@ -1,4 +1,5 @@
 ﻿using System.Web.Http;
+using System.Web.Http.Cors;
 using Newtonsoft.Json.Serialization;
 
 namespace EdmxConv.WebAPI
@@ -8,7 +9,7 @@ namespace EdmxConv.WebAPI
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
-            config.EnableCors();
+            config.EnableCors(new EnableCorsAttribute("*", "*", "*"));
             config.UseCamelCaseInHttpResponses();
 
 
